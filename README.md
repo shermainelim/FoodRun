@@ -72,6 +72,7 @@ For customers need purchase history too
 
 
 - The Do Before Features
+
  Create custom alert messages with toast or custom component
 
  Error handling 
