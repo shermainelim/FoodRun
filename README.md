@@ -1,4 +1,4 @@
-# FoodRun
+# Food Dash
 
 My new idea will be called SwiftFood / FoodRun .  I did research and this is not available in SG yet. Is implemented in Canada and US and is called FlashFood
 
