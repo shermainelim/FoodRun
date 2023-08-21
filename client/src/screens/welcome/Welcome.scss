@@ -1,7 +1,7 @@
 
 body, html {
 
-  background-color: white;
+  background-color: #f9f6d5;
 }
 
 @media (max-width:960px){
@@ -25,7 +25,7 @@ body, html {
 
 div#root {
   //height: 100%; /* remove this line to see div.app is no more 100% height */
-  background-color: white;
+  background-color: #f9f6d5;
   min-width:auto;
   
 
@@ -33,7 +33,7 @@ div#root {
 
 div.app {
 
-  background-color: white;
+  background-color: #f9f6d5
 }
 
 .container{
@@ -45,7 +45,7 @@ div.app {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: white;
+  background-color: #f9f6d5;
   margin-top: 14.875rem;;
 
   .react-confirm-alert-overlay {
@@ -55,7 +55,7 @@ div.app {
     right: 0;
     bottom: 0;
     z-index: 99;
-    background: white;
+    background: #f9f6d5;
   }
    
 
