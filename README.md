@@ -13,7 +13,7 @@ The flow is , i as the customer will search nearby food or bakery and snatch tho
 The stores upon payment will auto deduct from inventory.
 
 
-Start Date: 27 March 2023 End Date: 10 Feb 2024
+Start Date: 21 Aug 2023 End Date: Dec 2023
 
 Tech stack:
 
