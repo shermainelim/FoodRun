@@ -1,0 +1,22 @@
+.register-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    margin-top: 25.875rem;
+
+    .register-title{
+        font-size: 1.875rem;
+        text-align: center;
+        font-weight: 700;
+        color:black;
+        margin-bottom: 1.25rem;
+    }
+
+    
+}

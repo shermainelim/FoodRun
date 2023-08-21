@@ -1,0 +1,71 @@
+@import "../../src/screens/scss/colors";
+
+.basic {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  color: black;
+  margin: 1rem;
+  outline: none;
+  border-radius: 1.25rem;
+  min-width: 25rem;
+  height: 2.5rem;
+  font-family: monospace;
+
+  .spinner{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+
+.btn {
+  background-color: $kaya-green;
+}
+
+.add-ticket-btn {
+  background-color: $golden-ticket;
+}
+
+.alert-btn {
+  background-color: aliceblue;
+
+}
+
+.resident-btn {
+  background-color: aliceblue;
+
+}
+
+.staff-btn {
+  background-color: $chocolate-brown;
+}
+
+.default-color {
+  background-color: $sea-blue;
+}
+
+.submit-color {
+  background-color: $positive-green;
+}
+
+.logout-color {
+  background-color: $out-red;
+}
+
+.login-verify-color {
+  background-color: $verify-green;
+}
+
+.staff-logout {
+  background-color: $tomato-red;
+}
+
+.admin-btn {
+  background-color: $royal-blue;
+}
+
+.chocolate-bar {
+  background-color: $chocolate-bar;
+}

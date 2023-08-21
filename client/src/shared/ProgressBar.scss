@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+}
+
+.progress {
+	background-color: #d8d8d8;
+	border-radius: 1.25rem;
+	position: relative;
+	margin: 0.9375rem 0;
+	height: 1.875rem;
+	width: 18.75rem;
+
+	.pro-card-description{
+		margin-top:1.25rem;
+		margin-bottom:1.25rem;
+	}
+
+	.pro-card-btn-contribute {
+		text-align: center;
+		width: 90%;
+		border-radius: 0.3125rem;
+		padding: 0.5rem 1rem;
+	    background-color: aliceblue;
+    color: black;
+		text-decoration: none;
+		margin-bottom: 1.25rem;
+		margin-left: 1.25rem;
+		padding:0.625rem;
+		align-items: center;
+	  }
+	
+	  .pro-card-btn-backtrack {
+		text-align: center;
+		width: 90%;
+		border-radius: 0.3125rem;
+		padding: 0.5rem 1rem;
+	    background-color: aliceblue;
+    color: black;
+		text-decoration: none;
+		margin-bottom: 1.25rem;
+		padding:0.625rem;
+		margin-left: 1.25rem;
+		align-items: center;
+	  }
+}
+
+.progress-done {
+	background: linear-gradient(to left, turquoise, aquamarine);
+    box-shadow: 0 0.1875rem 0.1875rem -0.3125rem turquoise, 0 0.125rem 0.3125rem turquoise;
+	border-radius: 1.25rem;
+	color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 0;
+	opacity: 0;
+	transition: 1s ease 0.3s;
+}
+
+.progress-start-end{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	margin-bottom: 1.25rem;
+}
+.progress-start{
+
+}
+
+.progress-end{
+
+}
+
+.pro-card-description {
+    margin-top: 1.5625rem;
+  }
+  
+  

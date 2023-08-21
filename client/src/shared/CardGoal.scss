@@ -1,0 +1,42 @@
+.card-container-goal {
+    width: 90%;
+    border-radius: 1rem;
+    box-shadow: 0rem 0.625rem 0.5rem #999;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+    background-color: rgb(17, 147, 112);
+    height: fit-content;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .card-progress-bar{
+    margin-left:3.75rem;
+    margin-right:3.75rem;
+  }
+  
+  .card-img {
+    width: 100%;
+    border-radius: 1rem 1rem 0 0;
+  }
+  
+  .card-title {
+    font-size: 1.125rem;
+  }
+  
+  .card-description {
+    margin-top: 1.5625rem;
+  }
+  
+  .card-btn {
+    text-align: center;
+    width: 90%;
+    border-radius: 0.3125rem;
+    padding: 0.5rem 1rem;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    margin: 1.25rem;
+    align-items: center;
+  }

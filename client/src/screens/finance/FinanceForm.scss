@@ -1,0 +1,86 @@
+
+body, html {
+  
+    background-color: white;
+  }
+  
+  
+  div#root {
+    //height: 100%; /* remove this line to see div.app is no more 100% height */
+    background-color: white;
+    min-width:auto;
+    
+  
+  }
+  
+  div.app {
+  
+    background-color: white;
+  }
+  
+  .finance-space-container{
+    margin-top:17.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    margin-bottom: 6.25rem;
+
+    .big-card-container {
+        width: 85%;
+        border-radius: 1rem;
+        box-shadow: 0rem 0.625rem 0.5rem #999;
+        display: flex;
+        flex-direction: column;
+        margin: 0.5rem;
+        color:white;
+        background-color: white;
+        height: fit-content;
+        margin-left: 3rem;
+
+        border-color: black;
+        border-style: solid;
+        color:black;
+        font-family: monospace;
+
+        .big-card-title{
+            font-size: 1.25rem;
+            font-weight: 900;
+            margin-top: 0.625rem;
+            margin-bottom: 0.625rem;
+           display:"flex";
+           flex-direction: row;
+          }
+
+        .small-card-container-goals {
+            width: 95%;
+            border-radius: 1rem;
+            box-shadow: 0rem 0.625rem 0.5rem antiquewhite;
+            display: flex;
+            flex-direction: column;
+            margin: 0.5rem;
+            color:black;
+            background-color: antiquewhite;
+            height: fit-content;
+            margin-left: 0.75rem;
+            margin-bottom: 1.875rem;
+            margin-right: 1.25rem;
+            padding: 1.25rem;
+    
+          }
+        .small-card-title{
+          font-size: 1.125rem;
+        }
+        .input-general-error{
+          margin-right: 13.125rem;
+          margin-top: 0.125rem;
+          margin-bottom: 1.875rem;
+          color: darkred;
+      }
+      }
+    
+  }
