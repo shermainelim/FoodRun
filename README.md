@@ -1,4 +1,4 @@
-# FoodRun
+# Food Dash
 
 My new idea will be called SwiftFood / FoodRun .  I did research and this is not available in SG yet. Is implemented in Canada and US and is called FlashFood
 
@@ -44,6 +44,8 @@ Ensuring the backend is of utmost secure and data sanitized
 Todo List
 
 - The New Stuff
+ 
+How to stay logged in on both mobile and web , with sessions or?
 
 Implement Stripe API for payment
 
