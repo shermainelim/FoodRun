@@ -1,6 +1,4 @@
 # FoodRun
-SwiftFood or FoodRun or whatever the name we settle later
-
 
 My new idea will be called SwiftFood / FoodRun .  I did research and this is not available in SG yet. Is implemented in Canada and US and is called FlashFood
 
@@ -8,7 +6,7 @@ Basically is a food saving app . So u know the bakery always around 9 or 9.30 wi
 
 I want to digitalize these discounts so more ppl can access them , buy them and reduce food wastage for the stores .
 
-In this way , stores reduce food wastage , poor and nerdy can get more of these items and the general public can save money.
+In this way , stores reduce food wastage , poor and needy can get more of these items and the general public can save money.
 
 The flow is , i as the customer will search nearby food or bakery and snatch those flash deals and pay with stripe and collect/reserve them. 
 
