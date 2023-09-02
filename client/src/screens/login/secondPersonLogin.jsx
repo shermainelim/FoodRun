@@ -43,8 +43,7 @@ const SecondPersonLogin = () => {
 
   return (
     <div className={cx("so-register-container")}>
-
-<img
+<div style={{position:"relative"}}><img
         data-testid="img-logo-resident"
         className={cx("so-login-home")}
         src={store}
@@ -56,7 +55,8 @@ const SecondPersonLogin = () => {
         className={cx("so-login-cats")}
         src={storeCat}
         alt="Logo"
-      />
+      /></div>
+
       <div className="so-register-title"> Login as Store Owner</div>
 
       

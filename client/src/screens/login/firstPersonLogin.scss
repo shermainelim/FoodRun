@@ -9,6 +9,10 @@
     text-align: center;
     background-color: #f9f6d5;
 
+    .cus-img-container{
+        position:relative
+    }
+
     .cus-login-home{
         width:200px;
         height:200px;
@@ -20,7 +24,7 @@
         width:40px;
         height:40px;
         position: absolute;
-        top: 36%;
+        top: 69%;
         left: 50%;
     } 
 

@@ -37,6 +37,42 @@ import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
 import toast from "../../assets/toat.png";
 import hamster from "../../assets/hamster.gif";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { Image } from "semantic-ui-react";
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    paritialVisibilityGutter: 60
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    paritialVisibilityGutter: 50
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    paritialVisibilityGutter: 30
+  }
+};
+const images = [
+  "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550330039-a54e15ed9d33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+];
+
 
 const DashboardFirst = () => {
   const cx = classNames.bind(styles);
@@ -141,241 +177,23 @@ const DashboardFirst = () => {
     });
   }
 
-  const onClickDelete = () => {
-    confirmAlert({
-      customUI: ({ onClose }) => {
-        dispatch(spaceDelete({ secondPersonEmail,spaceName }));
-        dispatch(logOutFirstPerson());
-        setLogout(true);
-        dispatch(completeSpaceDelete());
-        onClose();
-      },
-    });
-  };
+  
 
-  const onSubmit = () => {
-    confirmAlert({
-      customUI: ({ onClose }) => {
-        return (
-          <div
-            style={{
-         
-              fontSize: "1.25rem",
-              fontFamily: "monospace",
-            }}
-          >
-            <h1>Are you sure?</h1>
-            <p>
-              You want to delete this couple space? <br />
-              <br />
-              It will delete both accounts in the <br /> <br />
-              couple space.
-            </p>
 
-            <CustomButton
-              className="alert-btn"
-              testId="resident"
-              content="No"
-              clicked={onClose}
-            ></CustomButton>
 
-            <CustomButton
-              className="alert-btn"
-              testId="resident"
-              content="Yes. Delete Couple Space"
-              clicked={onClickDelete}
-            ></CustomButton>
-          </div>
-        );
-      },
-    });
-  };
-
-  //second person login
-
-  var shortMonthNameFirstPersonUserBday = moment(
-    secondPersonBirthdayUser
-  ).format("DD MMM YYYY");
-  var shortMonthNameSecondPersonBday =
-    moment(secondPersonBirthday).format("DD MMM YYYY");
-  var shortMonthAnniversaryFirstPersonUser = moment(
-    anniversaryDateFirstPersonUser
-  ).format("DD MMM YYYY");
-
-  const logoutHandler = async () => {
-    dispatch(logOutFirstPerson());
-    setLogout(true);
-  };
 
   if (logout) {
     return <Navigate to="/" />;
   }
 
-  // mm.dd.yyyy
-  let daysTgt = cgUtils.getNumberOfDays(anniversaryDateFirstPersonUser);
 
-  const yearsTgt = cgUtils.getFormatedStringFromDays(daysTgt);
+  
 
-  // Add task
-  ///////////
-  const addTask = () => {
-    if (newTask) {
-      let num = cgUtils.randomIntFromInterval(1, 10000000);
-      setToDo([...toDo, { id: num, title: newTask, status: false }]);
-
-      setNewTask("");
-
-      let id = num;
-      let title = newTask;
-      let status = false;
-
-      dispatch(goalPost({ spaceName, id, title, status }));
-    }
-  };
-
-  // Delete task
-  //////////////
-  const deleteTask = (tid) => {
-    // refactored
-    setToDo(toDo.filter((task) => task.id !== tid));
-
-    let id = tid;
-
-    dispatch(goalDelete({ spaceName, id }));
-  };
-
-  // Mark task as done or completed
-  const markDone = (idt) => {
-    let id = idt;
-    let status = true;
-
-    setToDo(
-      toDo.map((task) =>
-        task.id === idt ? { ...task, status: !task.status } : task
-      )
-    );
-
-    dispatch(goalDone({ status, spaceName, id }));
-  };
-
-  // Cancel update
-  const cancelUpdate = () => {
-    setUpdateData("");
-  };
-
-  // Change task for update
-  const changeHolder = (e) => {
-    setUpdateData({ ...updateData, title: e.target.value });
-  };
-
-  // Update task
-  const updateTask = () => {
-    let removeOldRecord = [...toDo].filter((task) => task.id !== updateData.id);
-    setToDo([...removeOldRecord, updateData]);
-
-    setUpdateData("");
-  };
-
-  const trashCanHandler = (tid) => {
-    setToDoFinance(toDoFinance.filter((task) => task.id !== tid));
-    let id = tid;
-    dispatch(financeDelete({ spaceName, id }));
-  };
-
-  const renderMainCoupleCard = () => {
-    return (
-      <div className="main-big-card-container">
-        <div>
-          <div className={cx("space-name-new")}>
-            Couple Space of {spaceName}
-          </div>
-        </div>
-        <div className="main-small-card-container-goals">
-          <div className={cx("space-welcome")}>
-            Welcome {secondPersonNameUser}
-          </div>
-
-          <div className={cx("space-welcome")}>
-            Your Birthday: {shortMonthNameFirstPersonUserBday}
-          </div>
-
-          <div className={cx("space-welcome")}>
-            Your Partner's Name: {secondPersonName}
-          </div>
-          <div className={cx("space-welcome")}>
-            Your Partner's Birthday: {shortMonthNameSecondPersonBday}
-          </div>
-
-          <div className={cx("space-welcome")}>
-            When did you get together? {shortMonthAnniversaryFirstPersonUser}
-          </div>
-
-          <div className={cx("space-welcome")}>
-            Been together for {daysTgt} days, which is <br />
-            {yearsTgt}
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderFinanceCard = () => {
-    return (
-      <div className="big-card-container">
-        <div className="big-card-icon">
-          <div className="big-finance-card-title">Finance Tracker</div>
-          <div
-            onClick={() => {
-              navigate("/financeForm");
-            }}
-          >
-            <FontAwesomeIcon size="3x" icon={faCirclePlus} />
-          </div>
-        </div>
-
-        <Card todoFinance={toDoFinance} deleteFinance={trashCanHandler} />
-      </div>
-    );
-  };
-
-  const renderGoalCard = () => {
-    return (
-      <div className="big-card-container-goals">
-        <div className="big-card-title">Goal Tracker</div>
-
-        <div className="small-card-container-goals">
-          {updateData && updateData ? (
-            <UpdateForm
-              updateData={updateData}
-              changeHolder={changeHolder}
-              updateTask={updateTask}
-              cancelUpdate={cancelUpdate}
-            />
-          ) : (
-            <AddTaskForm
-              newTask={newTask}
-              setNewTask={setNewTask}
-              addTask={addTask}
-            />
-          )}
-
-          {toDo && toDo.length ? "" : "No Tasks..."}
-
-          <ToDo
-            toDo={toDo}
-            markDone={markDone}
-            setUpdateData={setUpdateData}
-            deleteTask={deleteTask}
-          />
-        </div>
-      </div>
-    );
-  };
-
+  
+  
   return (
     <div className={cx("dh-cus-container")}>
-     
-     <img
+     <div style={{position:"relative"}}> <img
           data-testid="img-logo-resident"
           className={cx("dh-cus-hamster")}
           src={hamster}
@@ -389,7 +207,8 @@ const DashboardFirst = () => {
           src={toast}
           alt="Logo"
          
-        />
+        /></div>
+    
 
 <input
         style={{
@@ -416,32 +235,30 @@ const DashboardFirst = () => {
         placeholder="Search Postal Code"
         
       />
+<div className={cx("dh-cus-caro")}>
+<Carousel
+  containerClass="carousel-container"
 
-    
+      partialVisbile={true}
+      arrows={false}
+      itemClass="image-item"
+      responsive={responsive}
+      
+    >
+      {images.map(image => {
+        return (
+          <Image
+            draggable={false}
+            style={{ marginRight:"10px",width: "120px", height: "110px" }}
+            src={image}
+          />
+        );
+      })}
+    </Carousel></div>
 
 
-      <CustomButton
-        className="resident-btn"
-        testId="resident"
-        content="Logout"
-        clicked={logoutHandler}
-      ></CustomButton>
 
-      <CustomButton
-        className="resident-btn"
-        testId="resident"
-        content="Change Password"
-        clicked={() => {
-          navigate("/changePassword");
-        }}
-      ></CustomButton>
-
-      <CustomButton
-        className="resident-btn"
-        testId="resident"
-        content="Delete Couple Space"
-        clicked={onSubmit}
-      ></CustomButton>
+      
     </div>
   );
 };

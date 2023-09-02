@@ -8,3 +8,10 @@
     background:#f9f6d5;
     text-align: center;
   }
+
+  .react-multi-carousel-list {
+  display: block;
+  align-items: baseline;
+    overflow: hidden;
+    position: relative;
+  }

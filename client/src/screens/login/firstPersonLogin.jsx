@@ -43,6 +43,7 @@ const FirstPersonLogin = () => {
 
   return (
     <div className={cx("cus-container")}>
+      <div className={cx("cus-img-container")}>
          <img
         data-testid="img-logo-resident"
         className={cx("cus-login-home")}
@@ -57,7 +58,7 @@ const FirstPersonLogin = () => {
         alt="Logo"
       />
       <div className="cus-title"> Login as Customer</div>
-
+      </div>
      
 
       <input
