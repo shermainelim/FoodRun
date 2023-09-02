@@ -13,6 +13,8 @@ import ChangePassword from "../screens/changePassword/ChangePassword";
 import ChangePasswordSecond from "../screens/changePassword/ChangePasswordSecond";
 import DashboardFirst from "../screens/Dashboard/DashboardFirst";
 import DashboardTwo from "../screens/Dashboard/DashboardTwo";
+import RegisterOptions from "../screens/register/RegisterOptions";
+import RegisterSO from "../screens/register/RegisterSO";
 
 const AppNavigator = () => {
   return (
@@ -32,6 +34,8 @@ const AppNavigator = () => {
         <Route path="/forgetPasswordSecond" element={<ForgetPasswordSec/>} />
         <Route path="/changePassword" element={<ChangePassword/>} />
         <Route path="/changePasswordSecond" element={<ChangePasswordSecond/>} />
+        <Route path="/registerOptions" element={<RegisterOptions/>} />
+        <Route path="/registerSO" element={<RegisterSO/>} />
       </Routes>
     </Router>
   );

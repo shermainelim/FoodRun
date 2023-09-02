@@ -117,7 +117,7 @@ else{
         testId="resident"
         content="Register"
         clicked={() => {
-          navigate("/register");
+          navigate("/registerOptions");
         }}
       ></CustomButton>
 

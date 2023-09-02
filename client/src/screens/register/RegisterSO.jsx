@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { checkUnique, register } from "../../redux/appSlice";
-import styles from "./Register.scss";
+import styles from "./RegisterSO.scss";
 import classNames from "classnames/bind";
 import CustomButton from "../../shared/CustomButton";
 import { useNavigate } from "react-router-dom";
 import axios from "../../utils/axios";
 import cogoToast from "cogo-toast";
 
-const Register = () => {
+const RegisterSO = () => {
   const cx = classNames.bind(styles);
 
   const [spaceName, setChangeSpaceName] = useState("");
@@ -17,7 +17,6 @@ const Register = () => {
   const [firstPersonName, setChangeFirstPersonName] = useState("");
   const [firstPersonEmail, setChangeFirstPersonEmail] = useState("");
   const [firstPersonPassword, setChangeFirstPersonPassword] = useState("");
-  const [firstPersonBirthday, setChangeFirstPersonBirthday] = useState("");
 
   const [address, setAddress] = useState("");
   const [postalCode, setPostalCode] = useState("");
@@ -48,9 +47,7 @@ const Register = () => {
     setChangeFirstPersonPassword(event.target.value);
   };
 
-  const firstPersonBirthdayHandler = (event) => {
-    setChangeFirstPersonBirthday(event.target.value);
-  };
+
 
   const addressHandler = (event) => {
     setAddress(event.target.value);
@@ -81,7 +78,7 @@ const Register = () => {
 
   return (
     <div className={cx("register-only-container")}>
-      <div className="register-title"> Create an account (Customer) </div>
+      <div className="register-title"> Create an account (Store Owners) </div>
 
       <div className={cx("input-container")}>
         <div className={cx("input-couple-space-name")}>
@@ -119,13 +116,13 @@ const Register = () => {
           ></CustomButton>
         </div>
 
-        <div className={cx("input-couple-space-name-person")}>User details</div>
+        <div className={cx("input-couple-space-name-person")}>Store details</div>
         <div>
           <input
             className={cx("input-general")}
             type="text"
             name="name"
-            placeholder="Full Name"
+            placeholder="Store Name"
             value={firstPersonName}
             onChange={firstPersonNameHandler}
           />
@@ -191,28 +188,6 @@ const Register = () => {
           <div className={cx("input-general-error")}>*required</div>
         ) : null}
 
- 
-
-<div className={cx("input-couple-anni")}>
-          Enter your birthday{" "}
-        </div>
-        <div>
-          <input
-            className={cx("input-general")}
-            type="date"
-            name="name"
-            placeholder="Birth Date"
-            value={firstPersonBirthday}
-            onChange={firstPersonBirthdayHandler}
-          />
-        </div>
-        {firstPersonBirthday.length === 0 && formSubmitted ? (
-          <div className={cx("input-general-error")}>*required</div>
-        ) : null}
-
-        
- 
-
 
       </div>
 
@@ -227,8 +202,7 @@ const Register = () => {
             spaceName.length !== 0 &&
             firstPersonName.length !== 0 &&
             firstPersonEmail.length !== 0 &&
-            firstPersonPassword.length !== 0 &&
-            firstPersonBirthday.length !== 0 
+            firstPersonPassword.length !== 0 
             
           ) {
             dispatch(
@@ -238,7 +212,7 @@ const Register = () => {
                 firstPersonName,
                 firstPersonEmail,
                 firstPersonPassword,
-                firstPersonBirthday,
+            
                 
               })
             );
@@ -267,4 +241,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterSO;
