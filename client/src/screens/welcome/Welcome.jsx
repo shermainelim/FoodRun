@@ -1,15 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Welcome.scss";
 import Eco from "../../assets/f1.png";
+import butterfly from "../../assets/butterfly.gif";
 import CustomButton from "../../shared/CustomButton";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import cloth2 from "../../assets/music/cloth2.mp3";
+import volOn from "../../assets/vol-on.png";
+import volOff from "../../assets/vol-off.png";
+
 
 const Welcome = () => {
   const navigate = useNavigate();
   const cx = classNames.bind(styles);
+
+  const [aud, setAud] = useState(false);
+
+  let audio = new Audio(cloth2)
+
+  const music = document.getElementById('audio');
+
+  useEffect(()=>{
+
+if(!aud){
+  music.pause();
+  music.currentTime = 0 ;
+}
+else{
+  console.log("music")
+  music.play();
+}
+  },[aud])
+
+
+  const navigateLogin=()=>{
+    audio.play();
+    navigate("/loginOptions");
+  }
 
   const onSubmit = () => {
     confirmAlert({
@@ -47,11 +76,25 @@ const Welcome = () => {
     });
   };
 
+  
 
 
 
   return (
     <div className={cx("container")}>
+      <img
+        data-testid="img-logo-resident"
+        className={cx("volOn")}
+        src={aud?volOn:volOff}
+        alt="Logo"
+        onClick={()=>setAud(!aud)}
+      />
+      <img
+        data-testid="img-logo-resident"
+        className={cx("gifButterfly")}
+        src={butterfly}
+        alt="Logo"
+      />
       <img
         data-testid="img-logo-resident"
         className={cx("imageIcon")}
@@ -65,7 +108,7 @@ const Welcome = () => {
         testId="resident"
         content="Login"
         clicked={() => {
-          navigate("/loginOptions");
+          navigateLogin();
         }}
       ></CustomButton>
 

@@ -19,12 +19,9 @@ const Register = () => {
   const [firstPersonPassword, setChangeFirstPersonPassword] = useState("");
   const [firstPersonBirthday, setChangeFirstPersonBirthday] = useState("");
 
-  const [secondPersonName, setChangeSecondPersonName] = useState("");
-  const [secondPersonEmail, setChangeSecondPersonEmail] = useState("");
-  const [secondPersonPassword, setChangeSecondPersonPassword] = useState("");
-  const [secondPersonBirthday, setChangeSecondPersonBirthday] = useState("");
-
-  const [anniDate, setAnniDate] = useState("");
+  const [address, setAddress] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  
   function randomIntFromInterval(min, max) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -55,25 +52,14 @@ const Register = () => {
     setChangeFirstPersonBirthday(event.target.value);
   };
 
-  const secondPersonNameHandler = (event) => {
-    setChangeSecondPersonName(event.target.value);
+  const addressHandler = (event) => {
+    setAddress(event.target.value);
   };
 
-  const secondPersonEmailHandler = (event) => {
-    setChangeSecondPersonEmail(event.target.value);
+  const postalCodeHandler = (event) => {
+    setPostalCode(event.target.value);
   };
 
-  const secondPersonPasswordHandler = (event) => {
-    setChangeSecondPersonPassword(event.target.value);
-  };
-
-  const secondPersonBirthdayHandler = (event) => {
-    setChangeSecondPersonBirthday(event.target.value);
-  };
-
-  const anniDateHandler = (event) => {
-    setAnniDate(event.target.value);
-  };
 
   const sendEmail = async () => {
     //e.preventDefault();
@@ -91,20 +77,7 @@ const Register = () => {
     cogoToast.success("Email First Sent!");
   };
 
-  const sendEmailSecondPerson = async () => {
-   
-    const data = {
-      secondPersonEmail,
-      secondPersonName
-    };
 
-    const response = await axios.post(
-      "https://couple-goals-new.herokuapp.com/api/sendEmailSecond",
-      data
-    );
-  
-    cogoToast.success("Email Second Sent!");
-  };
 
   return (
     <div className={cx("register-only-container")}>
@@ -188,7 +161,39 @@ const Register = () => {
         {firstPersonPassword.length === 0 && formSubmitted ? (
           <div className={cx("input-general-error")}>*required</div>
         ) : null}
-        <div className={cx("input-couple-anni")}>
+       
+
+<div>
+          <input
+            className={cx("input-general")}
+            type="text"
+            name="name"
+            placeholder="SG Address"
+            value={address}
+            onChange={addressHandler}
+          />
+        </div>
+        {address.length === 0 && formSubmitted ? (
+          <div className={cx("input-general-error")}>*required</div>
+        ) : null}
+
+<div>
+          <input
+            className={cx("input-general")}
+            type="text"
+            name="name"
+            placeholder="SG Postal Code"
+            value={address}
+            onChange={postalCodeHandler}
+          />
+        </div>
+        {postalCode.length === 0 && formSubmitted ? (
+          <div className={cx("input-general-error")}>*required</div>
+        ) : null}
+
+ 
+
+<div className={cx("input-couple-anni")}>
           Enter your birthday{" "}
         </div>
         <div>
@@ -196,7 +201,7 @@ const Register = () => {
             className={cx("input-general")}
             type="date"
             name="name"
-            placeholder="1st Person's Birthday"
+            placeholder="Birth Date"
             value={firstPersonBirthday}
             onChange={firstPersonBirthdayHandler}
           />
@@ -204,10 +209,6 @@ const Register = () => {
         {firstPersonBirthday.length === 0 && formSubmitted ? (
           <div className={cx("input-general-error")}>*required</div>
         ) : null}
-
- 
-
-    
 
         
  
@@ -227,12 +228,8 @@ const Register = () => {
             firstPersonName.length !== 0 &&
             firstPersonEmail.length !== 0 &&
             firstPersonPassword.length !== 0 &&
-            firstPersonBirthday.length !== 0 &&
-            secondPersonName.length !== 0 &&
-            secondPersonEmail.length !== 0 &&
-            secondPersonPassword.length !== 0 &&
-            secondPersonBirthday.length !== 0 &&
-            anniDate.length !== 0
+            firstPersonBirthday.length !== 0 
+            
           ) {
             dispatch(
               register({
@@ -242,23 +239,17 @@ const Register = () => {
                 firstPersonEmail,
                 firstPersonPassword,
                 firstPersonBirthday,
-                secondPersonName,
-                secondPersonEmail,
-                secondPersonPassword,
-                secondPersonBirthday,
-                anniDate,
+                
               })
             );
               sendEmail();
-              sendEmailSecondPerson();
+             
               setFormSubmitted(false);
             setChangeSpaceName("");
             setChangeFirstPersonName("");
             setChangeFirstPersonEmail("");
             setChangeFirstPersonPassword("");
-            setChangeSecondPersonName("");
-            setChangeSecondPersonEmail("");
-            setChangeSecondPersonPassword("");
+           
            
           }
         }}
