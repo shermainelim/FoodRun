@@ -15,7 +15,7 @@ const LoginOptions = () => {
       <CustomButton
         className="resident-btn"
         testId="resident"
-        content="First Person"
+        content="Customers"
         clicked={() => {
           navigate("/firstPersonLogin");
         }}
@@ -24,7 +24,7 @@ const LoginOptions = () => {
       <CustomButton
         className="resident-btn"
         testId="resident"
-        content="Second Person"
+        content="Store Owners"
         clicked={() => {
           navigate("/secondPersonLogin");
         }}

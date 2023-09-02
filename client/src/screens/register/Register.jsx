@@ -108,17 +108,17 @@ const Register = () => {
 
   return (
     <div className={cx("register-only-container")}>
-      <div className="register-title"> Create a Couple Space</div>
+      <div className="register-title"> Create an account</div>
 
       <div className={cx("input-container")}>
         <div className={cx("input-couple-space-name")}>
-          Your Unique Couple Space's Name
+          Your username
         </div>
         <input
           className={cx("input-general")}
           type="text"
           name="name"
-          placeholder="Couple Space Name"
+          placeholder="Username"
           value={spaceName}
           onChange={spaceNameHandler}
         />
@@ -129,7 +129,7 @@ const Register = () => {
           <CustomButton
             className="resident-btn"
             testId="resident"
-            content="Check if space name is unique"
+            content="Check if username is unique"
             clicked={async () => {
               setFormSubmitted(true);
 
@@ -146,13 +146,13 @@ const Register = () => {
           ></CustomButton>
         </div>
 
-        <div className={cx("input-couple-space-name-person")}>1st Person</div>
+        <div className={cx("input-couple-space-name-person")}>User details</div>
         <div>
           <input
             className={cx("input-general")}
             type="text"
             name="name"
-            placeholder="1st Person's Name"
+            placeholder="Full Name"
             value={firstPersonName}
             onChange={firstPersonNameHandler}
           />
@@ -166,7 +166,7 @@ const Register = () => {
             className={cx("input-general")}
             type="text"
             name="name"
-            placeholder="1st Person's Email"
+            placeholder="Email"
             value={firstPersonEmail}
             onChange={firstPersonEmailHandler}
           />
@@ -180,7 +180,7 @@ const Register = () => {
             className={cx("input-general")}
             type="password"
             name="name"
-            placeholder="1st Person's Password"
+            placeholder="Password"
             value={firstPersonPassword}
             onChange={firstPersonPasswordHandler}
           />
@@ -189,7 +189,7 @@ const Register = () => {
           <div className={cx("input-general-error")}>*required</div>
         ) : null}
         <div className={cx("input-couple-anni")}>
-          Enter first person's birthday{" "}
+          Enter your birthday{" "}
         </div>
         <div>
           <input
@@ -205,82 +205,14 @@ const Register = () => {
           <div className={cx("input-general-error")}>*required</div>
         ) : null}
 
-        <div className={cx("input-couple-space-name-person")}>2nd Person</div>
-        <div>
-          <input
-            className={cx("input-general")}
-            type="text"
-            name="name"
-            placeholder="2nd Person's Name"
-            value={secondPersonName}
-            onChange={secondPersonNameHandler}
-          />
-        </div>
-        {secondPersonName.length === 0 && formSubmitted ? (
-          <div className={cx("input-general-error")}>*required</div>
-        ) : null}
+ 
 
-        <div>
-          <input
-            className={cx("input-general")}
-            type="text"
-            name="name"
-            placeholder="2nd Person's Email"
-            value={secondPersonEmail}
-            onChange={secondPersonEmailHandler}
-          />
-        </div>
+    
 
-        {secondPersonEmail.length === 0 && formSubmitted ? (
-          <div className={cx("input-general-error")}>*required</div>
-        ) : null}
+        
+ 
 
-        <div>
-          <input
-            className={cx("input-general")}
-            type="password"
-            name="name"
-            placeholder="2nd Person's Password"
-            value={secondPersonPassword}
-            onChange={secondPersonPasswordHandler}
-          />
-        </div>
-        {secondPersonPassword.length === 0 && formSubmitted ? (
-          <div className={cx("input-general-error")}>*required</div>
-        ) : null}
-        <div className={cx("input-couple-anni")}>
-          Enter second person's birthday{" "}
-        </div>
-        <div>
-          <input
-            className={cx("input-general")}
-            type="date"
-            name="name"
-            placeholder="2nd Person's Birthday"
-            value={secondPersonBirthday}
-            onChange={secondPersonBirthdayHandler}
-          />
-        </div>
-        {secondPersonBirthday.length === 0 && formSubmitted ? (
-          <div className={cx("input-general-error")}>*required</div>
-        ) : null}
 
-        <div className={cx("input-couple-anni")}>
-          When did you get together?{" "}
-        </div>
-        <div>
-          <input
-            className={cx("input-general")}
-            type="date"
-            name="name"
-            placeholder="Enter date"
-            value={anniDate}
-            onChange={anniDateHandler}
-          />
-        </div>
-        {firstPersonName.length === 0 && formSubmitted ? (
-          <div className={cx("input-general-error")}>*required</div>
-        ) : null}
       </div>
 
       <CustomButton

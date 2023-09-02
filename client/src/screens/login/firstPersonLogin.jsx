@@ -42,7 +42,9 @@ const FirstPersonLogin = () => {
 
   return (
     <div className={cx("register-container")}>
-      <div className="register-title"> Login as 1st Person</div>
+      <div className="register-title"> Login as Customer</div>
+
+     
 
       <input
         style={{
@@ -53,34 +55,7 @@ const FirstPersonLogin = () => {
         }}
         type="text"
         name="name"
-        placeholder="Couple Space Name"
-        value={spaceName}
-        onChange={spaceNameHandler}
-      />
-
-      {spaceName.length === 0 && formSubmitted ? (
-        <div
-          style={{
-            marginRight: "11.25rem",
-            marginBottom: "0.3125rem",
-            marginTop: "-0.9375rem",
-            color: "darkred",
-          }}
-        >
-          *required
-        </div>
-      ) : null}
-
-      <input
-        style={{
-          borderRadius: "0.625rem",
-          padding: "0.5rem",
-          width:"18.5rem",
-          marginBottom: "1.25rem",
-        }}
-        type="text"
-        name="name"
-        placeholder="1st Person's Email"
+        placeholder="Username"
         value={firstPersonEmail}
         onChange={firstPersonEmailHandler}
       />
@@ -107,7 +82,7 @@ const FirstPersonLogin = () => {
         }}
         type="password"
         name="name"
-        placeholder="1st Person's Password"
+        placeholder="Password"
         value={firstPersonPassword}
         onChange={firstPersonPasswordHandler}
       />
