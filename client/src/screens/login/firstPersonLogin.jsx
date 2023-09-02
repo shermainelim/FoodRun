@@ -8,7 +8,8 @@ import styles from "./firstPersonLogin.scss";
 import classNames from "classnames/bind";
 import CustomButton from "../../shared/CustomButton";
 import { useNavigate } from "react-router-dom";
-
+import home from "../../assets/home.png";
+import cats from "../../assets/cats.gif";
 import { Navigate } from "react-router-dom";
 
 const FirstPersonLogin = () => {
@@ -41,8 +42,21 @@ const FirstPersonLogin = () => {
   };
 
   return (
-    <div className={cx("register-container")}>
-      <div className="register-title"> Login as Customer</div>
+    <div className={cx("cus-container")}>
+         <img
+        data-testid="img-logo-resident"
+        className={cx("cus-login-home")}
+        src={home}
+        alt="Logo"
+      />
+
+<img
+        data-testid="img-logo-resident"
+        className={cx("cus-login-cats")}
+        src={cats}
+        alt="Logo"
+      />
+      <div className="cus-title"> Login as Customer</div>
 
      
 

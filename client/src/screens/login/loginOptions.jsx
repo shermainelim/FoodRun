@@ -3,14 +3,21 @@ import styles from "./loginOptions.scss";
 import classNames from "classnames/bind";
 import CustomButton from "../../shared/CustomButton";
 import { useNavigate } from "react-router-dom";
+import pancakes from "../../assets/pancakes.png";
 
 const LoginOptions = () => {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
 
   return (
-    <div className={cx("register-container")}>
-      <div className="register-title"> Login Options</div>
+    <div className={cx("lo-op-container")}>
+               <img
+        data-testid="img-logo-resident"
+        className={cx("lo-op-pancakes")}
+        src={pancakes}
+        alt="Logo"
+      />
+      <div className="lo-op-title"> Login Options</div>
 
       <CustomButton
         className="resident-btn"

@@ -1,4 +1,4 @@
-.register-container{
+.register-op-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -8,9 +8,17 @@
     align-items: center;
     text-align: center;
     background-color: #f9f6d5;
-    margin-top: 25.875rem;
+    margin-top:32px;
 
-    .register-title{
+
+    .register-op-eggs{
+        width:180px;
+        height:230px;
+        margin-top:70px;
+        margin-bottom: 40px;
+    }   
+
+    .register-op-title{
         font-size: 1.875rem;
         text-align: center;
         font-weight: 700;

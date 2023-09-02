@@ -260,7 +260,7 @@ const Register = () => {
         testId="resident"
         content="Back"
         clicked={() => {
-          navigate("/");
+          navigate("/registerOptions");
         }}
       ></CustomButton>
     </div>

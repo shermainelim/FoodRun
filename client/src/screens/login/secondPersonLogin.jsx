@@ -9,6 +9,8 @@ import classNames from "classnames/bind";
 import CustomButton from "../../shared/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import store from "../../assets/store.png";
+import storeCat from "../../assets/storeCat.gif";
 
 const SecondPersonLogin = () => {
   const cx = classNames.bind(styles);
@@ -40,8 +42,22 @@ const SecondPersonLogin = () => {
   };
 
   return (
-    <div className={cx("register-container")}>
-      <div className="register-title"> Login as Store Owner</div>
+    <div className={cx("so-register-container")}>
+
+<img
+        data-testid="img-logo-resident"
+        className={cx("so-login-home")}
+        src={store}
+        alt="Logo"
+      />
+
+<img
+        data-testid="img-logo-resident"
+        className={cx("so-login-cats")}
+        src={storeCat}
+        alt="Logo"
+      />
+      <div className="so-register-title"> Login as Store Owner</div>
 
       
 

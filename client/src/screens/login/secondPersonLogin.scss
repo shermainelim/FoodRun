@@ -1,4 +1,4 @@
-.register-container{
+.so-register-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -9,11 +9,27 @@
     text-align: center;
     background-color: #f9f6d5;
 
-    .register-title{
+    .so-login-home{
+        width:200px;
+        height:200px;
+        margin-top:80px;
+        margin-bottom: 40px;
+    } 
+
+    .so-login-cats{
+        width:40px;
+        height:40px;
+        position: absolute;
+        top: 33%;
+        left: 71%;
+    } 
+
+    .so-register-title{
         font-size: 1.25rem;
         text-align: center;
         font-weight: 700;
         color:black;
+        margin-bottom: 5px;
     }
 
     .first-input-general{
