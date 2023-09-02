@@ -35,6 +35,7 @@ import * as cgUtils from "../../utils/cgUtil";
 import cogoToast from "cogo-toast";
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
+import toast from "../../assets/toat.png";
 
 const Dashboard = () => {
   const cx = classNames.bind(styles);
@@ -376,20 +377,11 @@ const Dashboard = () => {
         <img
           data-testid="img-logo-resident"
           className={cx("imageIcon")}
-          src={Couple}
+          src={toast}
           alt="Logo"
           style={{ width: "21.875rem", height: "21.875rem" }}
         />
 
-        {goalFetchLoading || financeFetchLoading ? (
-          <div className={cx("spinner")}>
-            <Spinner />
-          </div>
-        ) : (
-          <span title="refresh" onClick={refresh}>
-            <FontAwesomeIcon size={"3x"} icon={faRefresh} />{" "}
-          </span>
-        )}
       </div>
       {renderMainCoupleCard()}
       {renderFinanceCard()}

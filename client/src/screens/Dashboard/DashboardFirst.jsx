@@ -35,6 +35,8 @@ import * as cgUtils from "../../utils/cgUtil";
 import cogoToast from "cogo-toast";
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
+import toast from "../../assets/toat.png";
+import hamster from "../../assets/hamster.gif";
 
 const DashboardFirst = () => {
   const cx = classNames.bind(styles);
@@ -371,29 +373,52 @@ const DashboardFirst = () => {
   };
 
   return (
-    <div className={cx("space-container")}>
-      <div className={cx("space-refresh")}>
-        <img
+    <div className={cx("dh-cus-container")}>
+     
+     <img
           data-testid="img-logo-resident"
-          className={cx("imageIcon")}
-          src={Couple}
+          className={cx("dh-cus-hamster")}
+          src={hamster}
           alt="Logo"
-          style={{ width: "21.875rem", height: "21.875rem" }}
+         
         />
 
-        {goalFetchLoading || financeFetchLoading ? (
-          <div className={cx("spinner")}>
-            <Spinner />
-          </div>
-        ) : (
-          <span title="refresh" onClick={refresh}>
-            <FontAwesomeIcon size={"3x"} icon={faRefresh} />{" "}
-          </span>
-        )}
-      </div>
-      {renderMainCoupleCard()}
-      {renderFinanceCard()}
-      {renderGoalCard()}
+        <img
+          data-testid="img-logo-resident"
+          className={cx("dh-cus-imageIcon")}
+          src={toast}
+          alt="Logo"
+         
+        />
+
+<input
+        style={{
+          borderRadius: "0.625rem",
+          padding: "0.5rem",
+          width:"18.5rem",
+          marginBottom: "1.25rem",
+        }}
+        type="text"
+        name="name"
+        placeholder="Search Store"
+        
+      />
+
+<input
+        style={{
+          borderRadius: "0.625rem",
+          padding: "0.5rem",
+          width:"18.5rem",
+          marginBottom: "1.25rem",
+        }}
+        type="text"
+        name="name"
+        placeholder="Search Postal Code"
+        
+      />
+
+    
+
 
       <CustomButton
         className="resident-btn"
