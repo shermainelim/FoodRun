@@ -392,51 +392,47 @@ app.post("/checkUnique", (req, res) => {
   );
 });
 
-//register couples
+//register customers
 app.post("/register", (req, res) => {
   const id = req.body.id;
-  const spaceName = req.body.spaceName;
+  const username = req.body.username;
   const firstPersonName = req.body.firstPersonName;
   const firstPersonEmail = req.body.firstPersonEmail;
   const firstPersonPassword = req.body.firstPersonPassword;
-  const firstPersonBirthday = req.body.firstPersonBirthday;
+const address = req.body.address;
+const postalCode = req.body.postalCode;
 
-  const secondPersonName = req.body.secondPersonName;
-  const secondPersonEmail = req.body.secondPersonEmail;
-  const secondPersonPassword = req.body.secondPersonPassword;
-  const secondPersonBirthday = req.body.secondPersonBirthday;
-  const anniDate = req.body.anniDate;
+console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,address,postalCode);
 
 // do validation here before insert
 // because raw sql query, need validate for symbols. to prevent script insertion like <>
 // sanization of data
   const hash1 = bcrypt.hashSync(firstPersonPassword, saltRounds);
-  const hash2 = bcrypt.hashSync(secondPersonPassword, saltRounds);
+  //const hash2 = bcrypt.hashSync(secondPersonPassword, saltRounds);
 
-  db.query(
-    "SELECT * from heroku_4762ecdc0006081.space WHERE spaceName = ?",
-    [spaceName],
-    (err, result) => {
-      if (err) {
-        console.log("error", err);
-        res.send({ message: "Error, space not created." });
-      }
-      if (result.length > 0) {
-        res.send({ message: "Space name taken, space not created." });
-      } else {
-        res.send({ message: "Space name is unique, space created successfully" });
-        //space name not taken
+  // db.query(
+  //   "SELECT * from heroku_4762ecdc0006081.space WHERE spaceName = ?",
+  //   [spaceName],
+  //   (err, result) => {
+  //     if (err) {
+  //       console.log("error", err);
+  //       res.send({ message: "Error, space not created." });
+  //     }
+  //     if (result.length > 0) {
+  //       res.send({ message: "Space name taken, space not created." });
+  //     } else {
+  //       res.send({ message: "Space name is unique, space created successfully" });
+  //       //space name not taken
         
     db.query(
-      "INSERT INTO heroku_4762ecdc0006081.space ( id, spaceName, firstPersonName, firstPersonEmail, firstPersonPassword, firstPersonBirthday,secondPersonName, secondPersonEmail, secondPersonPassword , secondPersonBirthday, anniDate) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-      [
-        id, spaceName, firstPersonName, firstPersonEmail, hash1, firstPersonBirthday,secondPersonName, secondPersonEmail, hash2 , secondPersonBirthday, anniDate
-      ]
+      "INSERT INTO fooddash.customerRL ( id, username, fullName, email, password, sgAddress, sgPostalCode) VALUES (?,?,?,?,?,?,?)",
+      [id, username, firstPersonName, firstPersonEmail, hash1, address, postalCode]
     );
-      }
-    }
+
+    res.send({message: "Register Successful"});
+  } 
   );
-});
+
 
 
 //first person login

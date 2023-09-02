@@ -163,47 +163,46 @@ export const loginSecondPerson = createAsyncThunk(
   }
 );
 
+//register customer
 export const register = createAsyncThunk(
   `${name}/register`,
   async ({
     id,
-    spaceName,
+    username,
     firstPersonName,
     firstPersonEmail,
     firstPersonPassword,
-    firstPersonBirthday,
-    secondPersonName,
-    secondPersonEmail,
-    secondPersonPassword,
-    secondPersonBirthday,
-    anniDate,
+    address,
+    postalCode
   }) => {
     try {
+      console.log("hit reigster")
       const res = await axios.post("/register", {
         id,
-        spaceName,
+        username,
         firstPersonName,
         firstPersonEmail,
         firstPersonPassword,
-        firstPersonBirthday,
-        secondPersonName,
-        secondPersonEmail,
-        secondPersonPassword,
-        secondPersonBirthday,
-        anniDate,
+        address,
+        postalCode
       });
 
-      if (res.data.message === "Error, space not created.") {
-        cogoToast.error("Error, space not created.");
-      } else if (res.data.message === "Space name taken, space not created.") {
-        cogoToast.error("Not created.");
-      } else if (
-        res.data.message === "Space name is unique, space created successfully"
-      ) {
-        cogoToast.success("Created successfully");
+      console.log("Res here", res);
+
+      // if (res.data.message === "Error, account not created.") {
+      //   cogoToast.error("Error, account not created.");
+      // } else if (res.data.message === "Username taken, account not created.") {
+      //   cogoToast.error("Not created.");
+      // } else if (
+      //   res.data.message === "Username is unique, account created successfully"
+      // ) {
+      //   cogoToast.success("Created successfully");
+      // }
+      if (res.data.message === "Register Successful") {
+        cogoToast.success("Created.");
       }
     } catch (err) {
-      cogoToast.error("Register failed.");
+      cogoToast.error("Registration failed.");
     }
   }
 );

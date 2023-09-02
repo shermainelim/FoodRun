@@ -11,13 +11,13 @@ import cogoToast from "cogo-toast";
 const Register = () => {
   const cx = classNames.bind(styles);
 
-  const [spaceName, setChangeSpaceName] = useState("");
+  const [username, setChangeUsername] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [firstPersonName, setChangeFirstPersonName] = useState("");
   const [firstPersonEmail, setChangeFirstPersonEmail] = useState("");
   const [firstPersonPassword, setChangeFirstPersonPassword] = useState("");
-  const [firstPersonBirthday, setChangeFirstPersonBirthday] = useState("");
+  
 
   const [address, setAddress] = useState("");
   const [postalCode, setPostalCode] = useState("");
@@ -32,8 +32,8 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const spaceNameHandler = (event) => {
-    setChangeSpaceName(event.target.value);
+  const usernameHandler = (event) => {
+    setChangeUsername(event.target.value);
   };
 
   const firstPersonNameHandler = (event) => {
@@ -48,9 +48,6 @@ const Register = () => {
     setChangeFirstPersonPassword(event.target.value);
   };
 
-  const firstPersonBirthdayHandler = (event) => {
-    setChangeFirstPersonBirthday(event.target.value);
-  };
 
   const addressHandler = (event) => {
     setAddress(event.target.value);
@@ -92,10 +89,10 @@ const Register = () => {
           type="text"
           name="name"
           placeholder="Username"
-          value={spaceName}
-          onChange={spaceNameHandler}
+          value={username}
+          onChange={usernameHandler}
         />
-        {spaceName.length === 0 && formSubmitted ? (
+        {username.length === 0 && formSubmitted ? (
           <div className={cx("input-general-error")}>*required</div>
         ) : null}
         <div>
@@ -106,10 +103,10 @@ const Register = () => {
             clicked={async () => {
               setFormSubmitted(true);
 
-              if (spaceName.length !== 0) {
+              if (username.length !== 0) {
                 dispatch(
                   checkUnique({
-                    spaceName,
+                    username,
                   })
                 );
 
@@ -180,10 +177,9 @@ const Register = () => {
 <div>
           <input
             className={cx("input-general")}
-            type="text"
-            name="name"
+            type="number"
             placeholder="SG Postal Code"
-            value={address}
+            value={postalCode}
             onChange={postalCodeHandler}
           />
         </div>
@@ -191,26 +187,6 @@ const Register = () => {
           <div className={cx("input-general-error")}>*required</div>
         ) : null}
 
- 
-
-<div className={cx("input-couple-anni")}>
-          Enter your birthday{" "}
-        </div>
-        <div>
-          <input
-            className={cx("input-general")}
-            type="date"
-            name="name"
-            placeholder="Birth Date"
-            value={firstPersonBirthday}
-            onChange={firstPersonBirthdayHandler}
-          />
-        </div>
-        {firstPersonBirthday.length === 0 && formSubmitted ? (
-          <div className={cx("input-general-error")}>*required</div>
-        ) : null}
-
-        
  
 
 
@@ -224,31 +200,33 @@ const Register = () => {
           setFormSubmitted(true);
 
           if (
-            spaceName.length !== 0 &&
+            username.length !== 0 &&
             firstPersonName.length !== 0 &&
             firstPersonEmail.length !== 0 &&
             firstPersonPassword.length !== 0 &&
-            firstPersonBirthday.length !== 0 
-            
+            address.length!==0 &&
+            postalCode.length!==0
           ) {
             dispatch(
               register({
                 id,
-                spaceName,
+                username,
                 firstPersonName,
                 firstPersonEmail,
                 firstPersonPassword,
-                firstPersonBirthday,
-                
+                address,
+                postalCode
               })
             );
-              sendEmail();
+              //sendEmail();
              
               setFormSubmitted(false);
-            setChangeSpaceName("");
+            setChangeUsername("");
             setChangeFirstPersonName("");
             setChangeFirstPersonEmail("");
             setChangeFirstPersonPassword("");
+            setAddress("");
+            setPostalCode("");
            
            
           }
