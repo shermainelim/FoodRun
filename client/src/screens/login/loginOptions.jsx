@@ -4,10 +4,23 @@ import classNames from "classnames/bind";
 import CustomButton from "../../shared/CustomButton";
 import { useNavigate } from "react-router-dom";
 import pancakes from "../../assets/pancakes.png";
+import cloth2 from "../../assets/music/cloth2.mp3";
 
 const LoginOptions = () => {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
+
+  let audio = new Audio(cloth2);
+
+  const navigateCustomerLogin=()=>{
+    audio.play();
+    navigate("/firstPersonLogin");
+  }
+
+  const navigateSOLogin=()=>{
+    audio.play();
+    navigate("/secondPersonLogin");
+  }
 
   return (
     <div className={cx("lo-op-container")}>
@@ -24,7 +37,7 @@ const LoginOptions = () => {
         testId="resident"
         content="Customers"
         clicked={() => {
-          navigate("/firstPersonLogin");
+          navigateCustomerLogin();
         }}
       ></CustomButton>
 
@@ -33,7 +46,7 @@ const LoginOptions = () => {
         testId="resident"
         content="Store Owners"
         clicked={() => {
-          navigate("/secondPersonLogin");
+          navigateSOLogin();
         }}
       ></CustomButton>
 
