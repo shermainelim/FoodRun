@@ -207,20 +207,21 @@ export const register = createAsyncThunk(
   }
 );
 
+//check unique customer
 export const checkUnique = createAsyncThunk(
   `${name}/checkUnique`,
-  async ({ spaceName }) => {
+  async ({ username }) => {
     try {
       const res = await axios.post("/checkUnique", {
-        spaceName,
+        username,
       });
 
      
       if (res.data.message === "unique") {
-        cogoToast.success("Space name is unique.");
+        cogoToast.success("Username is unique.");
       }
       if (res.data.message === "taken") {
-        cogoToast.error("Space name taken.");
+        cogoToast.error("Username taken.");
       }
     } catch (err) {
       cogoToast.error("Check failed.");

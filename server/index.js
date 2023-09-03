@@ -369,15 +369,15 @@ app.post("/fetchGoal", (req, res) => {
   );
 });
 
-//check unique name 
+//check unique username for customers
 app.post("/checkUnique", (req, res) => {
  
-  const spaceName = req.body.spaceName;
+  const username = req.body.username;
 
 
   db.query(
-    "SELECT * from heroku_4762ecdc0006081.space WHERE spaceName = ?",
-    [spaceName],
+    "SELECT * from fooddash.customerRL WHERE username = ?",
+    [username],
     (err, result) => {
    
       if (result.length !== 0) {
@@ -386,7 +386,7 @@ app.post("/checkUnique", (req, res) => {
       } else {
        
         res.send({ message: "unique" });
-        //space name not taken
+        //username not taken
       }
     }
   );
