@@ -137,20 +137,19 @@ export const loginFirstPerson = createAsyncThunk(
   }
 );
 
-//login second person
-export const loginSecondPerson = createAsyncThunk(
-  `${name}/loginSecondPerson`,
-  async ({ spaceName, secondPersonEmail, secondPersonPassword }) => {
+//login SO
+export const loginSO = createAsyncThunk(
+  `${name}/loginSO`,
+  async ({ username, password }) => {
     try {
-      const res = await axios.post("/loginSecondPerson", {
-        spaceName,
-        secondPersonEmail,
-        secondPersonPassword,
+
+      const res = await axios.post("/loginSO", {
+        username,
+        password ,
       });
 
       if (res.status !== 200) {
-        cogoToast.error("Login Failed");
-
+        cogoToast.error("Login failed");
         return;
       }
 
@@ -724,17 +723,17 @@ const appSlice = createSlice({
     });
 
     //second person login
-    builder.addCase(loginSecondPerson.fulfilled, (state, { payload }) => {
+    builder.addCase(loginSO.fulfilled, (state, { payload }) => {
       state.secondPersonData = payload;
       if (payload) {
         state.isLoggedInSecondPerson = true;
       }
       state.loginLoadingSecondPerson = false;
     });
-    builder.addCase(loginSecondPerson.pending, (state) => {
+    builder.addCase(loginSO.pending, (state) => {
       state.loginLoadingSecondPerson = true;
     });
-    builder.addCase(loginSecondPerson.rejected, (state) => {
+    builder.addCase(loginSO.rejected, (state) => {
       state.loginLoadingSecondPerson = false;
     });
   },

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   useIsLoggedInSecondPerson,
-  loginSecondPerson,
+  loginSO,
 } from "../../redux/appSlice";
 import styles from "./secondPersonLogin.scss";
 import classNames from "classnames/bind";
@@ -18,10 +18,9 @@ const SecondPersonLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [spaceName, setChangeSpaceName] = useState("");
+  const [username, setChangeUsername] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [secondPersonEmail, setChangeSecondPersonEmail] = useState("");
-  const [secondPersonPassword, setChangeSecondPersonPassword] = useState("");
+  const [password, setChangePassword] = useState("");
 
   const isLoggedInSecondPerson = useIsLoggedInSecondPerson();
 
@@ -29,16 +28,12 @@ const SecondPersonLogin = () => {
     return <Navigate to="/dashboardSecond" />;
   }
 
-  const spaceNameHandler = (event) => {
-    setChangeSpaceName(event.target.value);
+  const usernameHandler = (event) => {
+    setChangeUsername(event.target.value);
   };
 
-  const secondPersonEmailHandler = (event) => {
-    setChangeSecondPersonEmail(event.target.value);
-  };
-
-  const secondPersonPasswordHandler = (event) => {
-    setChangeSecondPersonPassword(event.target.value);
+  const passwordHandler = (event) => {
+    setChangePassword(event.target.value);
   };
 
   return (
@@ -71,11 +66,11 @@ const SecondPersonLogin = () => {
         type="text"
         name="name"
         placeholder="Username"
-        value={secondPersonEmail}
-        onChange={secondPersonEmailHandler}
+        value={username}
+        onChange={usernameHandler}
       />
 
-      {secondPersonEmail.length === 0 && formSubmitted ? (
+      {username.length === 0 && formSubmitted ? (
         <div
           style={{
             marginRight: "11.25rem",
@@ -98,11 +93,11 @@ const SecondPersonLogin = () => {
         type="password"
         name="name"
         placeholder="Password"
-        value={secondPersonPassword}
-        onChange={secondPersonPasswordHandler}
+        value={password}
+        onChange={passwordHandler}
       />
 
-      {secondPersonPassword.length === 0 && formSubmitted ? (
+      {password.length === 0 && formSubmitted ? (
         <div
           style={{
             marginRight: "11.25rem",
@@ -123,20 +118,17 @@ const SecondPersonLogin = () => {
           setFormSubmitted(true);
 
           if (
-            spaceName.length !== 0 &&
-            secondPersonEmail.length !== 0 &&
-            secondPersonPassword.length !== 0
+            username.length !== 0 &&
+            password.length !== 0 
           ) {
             dispatch(
-              loginSecondPerson({
-                spaceName,
-                secondPersonEmail,
-                secondPersonPassword,
+              loginSO({
+                username,
+                password
               })
             );
-            setChangeSpaceName("");
-            setChangeSecondPersonEmail("");
-            setChangeSecondPersonPassword("");
+            setChangeUsername("");
+            setChangePassword("");
           }
         }}
       ></CustomButton>

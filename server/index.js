@@ -499,7 +499,7 @@ console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,a
 
 
 
-//username
+//login for customers
 app.post("/loginFirstPerson", (req, res) => {
   const username = req.body.username;
   const password = req.body.firstPersonPassword;
@@ -539,45 +539,47 @@ app.post("/loginFirstPerson", (req, res) => {
 });
 
 
-//second person login
-app.post("/loginSecondPerson", (req, res) => {
-  const spaceName = req.body.spaceName;
-  const secondPersonEmail = req.body.secondPersonEmail;
-  const secondPersonPassword = req.body.secondPersonPassword;
-
+//login for SO
+app.post("/loginSO", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
   db.query(
-    "SELECT * FROM heroku_4762ecdc0006081.space WHERE spaceName = ? and secondPersonEmail = ?",
-    [spaceName, secondPersonEmail],
+    "SELECT * FROM fooddash.storeOwnersRL WHERE username = ?",
+    [username],
     (err, result) => {
-   
       if (result.length > 0) {
+       
 
-        bcrypt.compare(secondPersonPassword, result[0].secondPersonPassword, (error, response) => {
+        bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
-            const spaceName = result[0].spaceName;
-        const firstPersonNameUser = result[0].firstPersonName;
-        const firstPersonBirthdayUser = result[0].firstPersonBirthday;
-        const secondPersonName = result[0].secondPersonName;
-        const secondPersonBirthday = result[0].secondPersonBirthday;
+            //send full name
+            
+        const storeName = result[0].storeName;
+        const sgAddress = result[0].sgAddress;
+        const sgPostalCode = result[0].sgPostalCode;
+        
 
-        const anniDate = result[0].anniDate;
+        const secondPersonDataData = [storeName, sgAddress, sgPostalCode]
 
-        const secondPersonData = [spaceName, firstPersonNameUser, firstPersonBirthdayUser, secondPersonName, secondPersonBirthday, anniDate, secondPersonEmail]
+        console.log("Response", res);
 
-        res.send({ data: secondPersonData, message: "Login is Successful"});
+        res.send({ data: secondPersonDataData, message: "Login is Successful"});
           } else {
-            res.send({ message: "Wrong username/password combination!" });
+            res.send({ message: "Wrong combination!" });
           }
         });
        
       } else {
-     
+       
         res.send({ message: "User not found" });
       }
     }
   );
 });
+
+
+
 
 connection.connect(function(err) {
   if (err) {
