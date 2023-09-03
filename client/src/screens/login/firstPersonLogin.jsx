@@ -18,9 +18,8 @@ const FirstPersonLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [spaceName, setChangeSpaceName] = useState("");
+  const [username, setChangeUsername] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [firstPersonEmail, setChangeFirstPersonEmail] = useState("");
   const [firstPersonPassword, setChangeFirstPersonPassword] = useState("");
 
   const isLoggedInFirstPerson = useIsLoggedInFirstPerson();
@@ -29,13 +28,10 @@ const FirstPersonLogin = () => {
     return <Navigate to="/dashboard" />;
   }
 
-  const spaceNameHandler = (event) => {
-    setChangeSpaceName(event.target.value);
+  const usernameHandler = (event) => {
+    setChangeUsername(event.target.value);
   };
 
-  const firstPersonEmailHandler = (event) => {
-    setChangeFirstPersonEmail(event.target.value);
-  };
 
   const firstPersonPasswordHandler = (event) => {
     setChangeFirstPersonPassword(event.target.value);
@@ -70,12 +66,12 @@ const FirstPersonLogin = () => {
         }}
         type="text"
         name="name"
-        placeholder="Username"
-        value={firstPersonEmail}
-        onChange={firstPersonEmailHandler}
+        placeholder="username"
+        value={username}
+        onChange={usernameHandler}
       />
 
-      {firstPersonEmail.length === 0 && formSubmitted ? (
+      {username.length === 0 && formSubmitted ? (
         <div
           style={{
             marginRight: "11.25rem",
@@ -121,21 +117,19 @@ const FirstPersonLogin = () => {
         content="Login"
         clicked={async () => {
           setFormSubmitted(true);
-
+         
           if (
-            spaceName.length !== 0 &&
-            firstPersonEmail.length !== 0 &&
+            username.length !== 0 &&
             firstPersonPassword.length !== 0
           ) {
+           
             dispatch(
               loginFirstPerson({
-                spaceName,
-                firstPersonEmail,
+                username,
                 firstPersonPassword,
               })
             );
-            setChangeSpaceName("");
-            setChangeFirstPersonEmail("");
+            setChangeUsername("");
             setChangeFirstPersonPassword("");
           }
         }}

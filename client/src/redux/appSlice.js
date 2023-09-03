@@ -109,11 +109,11 @@ export const fetchGoal = createAsyncThunk(
 //login first person
 export const loginFirstPerson = createAsyncThunk(
   `${name}/loginFirstPerson`,
-  async ({ spaceName, firstPersonEmail, firstPersonPassword }) => {
+  async ({ username, firstPersonPassword }) => {
     try {
+
       const res = await axios.post("/loginFirstPerson", {
-        spaceName,
-        firstPersonEmail,
+        username,
         firstPersonPassword,
       });
 

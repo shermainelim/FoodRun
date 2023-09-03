@@ -499,31 +499,30 @@ console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,a
 
 
 
-//first person login
+//username
 app.post("/loginFirstPerson", (req, res) => {
-  const spaceName = req.body.spaceName;
-  const firstPersonEmail = req.body.firstPersonEmail;
-  const firstPersonPassword = req.body.firstPersonPassword;
+  const username = req.body.username;
+  const password = req.body.firstPersonPassword;
 
   db.query(
-    "SELECT * FROM heroku_4762ecdc0006081.space WHERE spaceName = ? and firstPersonEmail = ?",
-    [spaceName, firstPersonEmail],
+    "SELECT * FROM fooddash.customerRL WHERE username = ?",
+    [username],
     (err, result) => {
       if (result.length > 0) {
        
 
-        bcrypt.compare(firstPersonPassword, result[0].firstPersonPassword, (error, response) => {
+        bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
             //send full name
-            const spaceName = result[0].spaceName;
-        const firstPersonNameUser = result[0].firstPersonName;
-        const firstPersonBirthdayUser = result[0].firstPersonBirthday;
-        const secondPersonName = result[0].secondPersonName;
-        const secondPersonBirthday = result[0].secondPersonBirthday;
+            
+        const fullName = result[0].fullName;
+        const sgAddress = result[0].sgAddress;
+        const sgPostalCode = result[0].sgPostalCode;
+        
 
-        const anniDate = result[0].anniDate;
+        const firstPersonData = [fullName, sgAddress, sgPostalCode]
 
-        const firstPersonData = [spaceName, firstPersonNameUser, firstPersonBirthdayUser, secondPersonName, secondPersonBirthday, anniDate, firstPersonEmail]
+        console.log("Response", res);
 
         res.send({ data: firstPersonData, message: "Login is Successful"});
           } else {
