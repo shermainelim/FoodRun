@@ -189,17 +189,13 @@ export const register = createAsyncThunk(
 
       console.log("Res here", res);
 
-      // if (res.data.message === "Error, account not created.") {
-      //   cogoToast.error("Error, account not created.");
-      // } else if (res.data.message === "Username taken, account not created.") {
-      //   cogoToast.error("Not created.");
-      // } else if (
-      //   res.data.message === "Username is unique, account created successfully"
-      // ) {
-      //   cogoToast.success("Created successfully");
-      // }
-      if (res.data.message === "Register Successful") {
-        cogoToast.success("Created.");
+      if (res.data.message === "Error, account not created.") {
+        cogoToast.error("Error, account not created.");
+      } else if (res.data.message === "Username taken, account not created.") {
+        cogoToast.error("Username taken, account not created.");
+      } 
+      else if (res.data.message === "Register successful") {
+        cogoToast.success("Created successfully.");
       }
     } catch (err) {
       cogoToast.error("Registration failed.");

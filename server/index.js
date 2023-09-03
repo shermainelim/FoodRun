@@ -408,29 +408,29 @@ console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,a
 // because raw sql query, need validate for symbols. to prevent script insertion like <>
 // sanization of data
   const hash1 = bcrypt.hashSync(firstPersonPassword, saltRounds);
-  //const hash2 = bcrypt.hashSync(secondPersonPassword, saltRounds);
+  
 
-  // db.query(
-  //   "SELECT * from heroku_4762ecdc0006081.space WHERE spaceName = ?",
-  //   [spaceName],
-  //   (err, result) => {
-  //     if (err) {
-  //       console.log("error", err);
-  //       res.send({ message: "Error, space not created." });
-  //     }
-  //     if (result.length > 0) {
-  //       res.send({ message: "Space name taken, space not created." });
-  //     } else {
-  //       res.send({ message: "Space name is unique, space created successfully" });
-  //       //space name not taken
+  db.query(
+    "SELECT * from fooddash.customerRL WHERE username = ?",
+    [username],
+    (err, result) => {
+      if (err) {
+        console.log("error", err);
+        res.send({ message: "Error, account not created." });
+      }
+      if (result.length > 0) {
+        res.send({ message: "Username taken, account not created." });
+      } else {
+        res.send({message: "Register successful"});
+        //Username not taken
         
     db.query(
       "INSERT INTO fooddash.customerRL ( id, username, fullName, email, password, sgAddress, sgPostalCode) VALUES (?,?,?,?,?,?,?)",
       [id, username, firstPersonName, firstPersonEmail, hash1, address, postalCode]
     );
-
-    res.send({message: "Register Successful"});
-  } 
+  
+  } })
+}
   );
 
 
