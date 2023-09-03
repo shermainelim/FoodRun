@@ -19,8 +19,14 @@ const initialState = {
   isLoggedInSecondPerson: false,
   registerLoading: false,
   isRegisterCreated: false,
+  registerSOLoading: false,
+  isRegisterSOCreated: false,
   uniqueLoading: false,
   isUniqueCreated: false,
+
+  uniqueSOLoading: false,
+  isUniqueSOCreated: false,
+
   financePostLoading: false,
   isFinancePostCreated: false,
   contributionBackPostLoading: false,
@@ -163,6 +169,45 @@ export const loginSecondPerson = createAsyncThunk(
   }
 );
 
+//register SO
+export const registerSO = createAsyncThunk(
+  `${name}/registerSO`,
+  async ({
+    id,
+    username,
+    firstPersonName,
+    firstPersonEmail,
+    firstPersonPassword,
+    address,
+    postalCode
+  }) => {
+    try {
+      console.log("hit reigster")
+      const res = await axios.post("/registerSO", {
+        id,
+        username,
+        firstPersonName,
+        firstPersonEmail,
+        firstPersonPassword,
+        address,
+        postalCode
+      });
+
+
+      if (res.data.message === "Error, account not created.") {
+        cogoToast.error("Error, account not created.");
+      } else if (res.data.message === "Username taken, account not created.") {
+        cogoToast.error("Username taken, account not created.");
+      } 
+      else if (res.data.message === "Register successful") {
+        cogoToast.success("Created successfully.");
+      }
+    } catch (err) {
+      cogoToast.error("Registration failed.");
+    }
+  }
+);
+
 //register customer
 export const register = createAsyncThunk(
   `${name}/register`,
@@ -209,6 +254,29 @@ export const checkUnique = createAsyncThunk(
   async ({ username }) => {
     try {
       const res = await axios.post("/checkUnique", {
+        username,
+      });
+
+     
+      if (res.data.message === "unique") {
+        cogoToast.success("Username is unique.");
+      }
+      if (res.data.message === "taken") {
+        cogoToast.error("Username taken.");
+      }
+    } catch (err) {
+      cogoToast.error("Check failed.");
+    }
+  }
+);
+
+
+//check unique so
+export const checkUniqueSO = createAsyncThunk(
+  `${name}/checkUniqueSO`,
+  async ({ username }) => {
+    try {
+      const res = await axios.post("/checkUniqueSO", {
         username,
       });
 
@@ -452,8 +520,7 @@ const appSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(checkUnique.fulfilled, (state) => {
-      state.is = true;
-
+ 
       state.uniqueLoading = false;
     });
     builder.addCase(checkUnique.pending, (state) => {
@@ -462,6 +529,19 @@ const appSlice = createSlice({
     builder.addCase(checkUnique.rejected, (state) => {
       state.uniqueLoading = false;
     });
+
+
+    builder.addCase(checkUniqueSO.fulfilled, (state) => {
+ 
+      state.uniqueSOLoading = false;
+    });
+    builder.addCase(checkUniqueSO.pending, (state) => {
+      state.uniqueSOLoading = true;
+    });
+    builder.addCase(checkUniqueSO.rejected, (state) => {
+      state.uniqueSOLoading = false;
+    });
+
 
     builder.addCase(register.fulfilled, (state) => {
       state.isUniqueCreated = true;

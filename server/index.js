@@ -369,6 +369,30 @@ app.post("/fetchGoal", (req, res) => {
   );
 });
 
+
+//check unique username for store owners
+app.post("/checkUniqueSO", (req, res) => {
+ 
+  const username = req.body.username;
+
+  db.query(
+    "SELECT * from fooddash.storeOwnersRL WHERE username = ?",
+    [username],
+    (err, result) => {
+   
+      if (result.length !== 0) {
+       
+        res.send({ message: "taken" });
+      } else {
+       
+        res.send({ message: "unique" });
+        //username not taken
+      }
+    }
+  );
+});
+
+
 //check unique username for customers
 app.post("/checkUnique", (req, res) => {
  
@@ -426,6 +450,46 @@ console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,a
         
     db.query(
       "INSERT INTO fooddash.customerRL ( id, username, fullName, email, password, sgAddress, sgPostalCode) VALUES (?,?,?,?,?,?,?)",
+      [id, username, firstPersonName, firstPersonEmail, hash1, address, postalCode]
+    );
+  
+  } })
+}
+  );
+
+  //register SO
+app.post("/registerSO", (req, res) => {
+  const id = req.body.id;
+  const username = req.body.username;
+  const firstPersonName = req.body.firstPersonName;
+  const firstPersonEmail = req.body.firstPersonEmail;
+  const firstPersonPassword = req.body.firstPersonPassword;
+const address = req.body.address;
+const postalCode = req.body.postalCode;
+
+console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,address,postalCode);
+
+// do validation here before insert
+// because raw sql query, need validate for symbols. to prevent script insertion like <>
+// sanization of data
+  const hash1 = bcrypt.hashSync(firstPersonPassword, saltRounds);
+
+  db.query(
+    "SELECT * from fooddash.storeOwnersRL WHERE username = ?",
+    [username],
+    (err, result) => {
+      if (err) {
+        console.log("error", err);
+        res.send({ message: "Error, account not created." });
+      }
+      if (result.length > 0) {
+        res.send({ message: "Username taken, account not created." });
+      } else {
+        res.send({message: "Register successful"});
+        //Username not taken
+        
+    db.query(
+      "INSERT INTO fooddash.storeOwnersRL ( id, username, storeName, email, password, sgAddress, sgPostalCode) VALUES (?,?,?,?,?,?,?)",
       [id, username, firstPersonName, firstPersonEmail, hash1, address, postalCode]
     );
   

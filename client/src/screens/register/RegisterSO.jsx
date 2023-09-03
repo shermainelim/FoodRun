@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { checkUnique, register } from "../../redux/appSlice";
+import { checkUniqueSO,registerSO } from "../../redux/appSlice";
 import styles from "./RegisterSO.scss";
 import classNames from "classnames/bind";
 import CustomButton from "../../shared/CustomButton";
@@ -11,7 +11,7 @@ import cogoToast from "cogo-toast";
 const RegisterSO = () => {
   const cx = classNames.bind(styles);
 
-  const [spaceName, setChangeSpaceName] = useState("");
+  const [username, setChangeUsername] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [firstPersonName, setChangeFirstPersonName] = useState("");
@@ -26,13 +26,13 @@ const RegisterSO = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  var id = randomIntFromInterval(1, 10000000);
+  var id = username+"-"+randomIntFromInterval(1, 10000000);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const spaceNameHandler = (event) => {
-    setChangeSpaceName(event.target.value);
+  const usernameHandler = (event) => {
+    setChangeUsername(event.target.value);
   };
 
   const firstPersonNameHandler = (event) => {
@@ -89,10 +89,10 @@ const RegisterSO = () => {
           type="text"
           name="name"
           placeholder="Username"
-          value={spaceName}
-          onChange={spaceNameHandler}
+          value={username}
+          onChange={usernameHandler}
         />
-        {spaceName.length === 0 && formSubmitted ? (
+        {username.length === 0 && formSubmitted ? (
           <div className={cx("input-general-error")}>*required</div>
         ) : null}
         <div>
@@ -103,10 +103,10 @@ const RegisterSO = () => {
             clicked={async () => {
               setFormSubmitted(true);
 
-              if (spaceName.length !== 0) {
+              if (username.length !== 0) {
                 dispatch(
-                  checkUnique({
-                    spaceName,
+                  checkUniqueSO({
+                    username,
                   })
                 );
 
@@ -177,10 +177,10 @@ const RegisterSO = () => {
 <div>
           <input
             className={cx("input-general")}
-            type="text"
+            type="number"
             name="name"
             placeholder="SG Postal Code"
-            value={address}
+            value={postalCode}
             onChange={postalCodeHandler}
           />
         </div>
@@ -199,32 +199,34 @@ const RegisterSO = () => {
           setFormSubmitted(true);
 
           if (
-            spaceName.length !== 0 &&
+            username.length !== 0 &&
             firstPersonName.length !== 0 &&
             firstPersonEmail.length !== 0 &&
-            firstPersonPassword.length !== 0 
+            firstPersonPassword.length !== 0 &&
+            address.length!==0 &&
+            postalCode.length!==0
             
           ) {
             dispatch(
-              register({
+              registerSO({
                 id,
-                spaceName,
+                username,
                 firstPersonName,
                 firstPersonEmail,
                 firstPersonPassword,
-            
-                
+                address,
+                postalCode
               })
             );
               sendEmail();
              
               setFormSubmitted(false);
-            setChangeSpaceName("");
+            setChangeUsername("");
             setChangeFirstPersonName("");
             setChangeFirstPersonEmail("");
             setChangeFirstPersonPassword("");
-           
-           
+            setAddress("");
+            setPostalCode("");
           }
         }}
       ></CustomButton>
