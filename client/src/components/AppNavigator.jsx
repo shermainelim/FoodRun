@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState }  from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import classNames from "classnames/bind";
+import styles from "./AppNavigator.scss";
 import Welcome from "../screens/welcome/Welcome";
 import Register from "../screens/register/Register";
 import LoginOptions from "../screens/login/loginOptions";
@@ -15,9 +18,43 @@ import DashboardFirst from "../screens/Dashboard/DashboardFirst";
 import DashboardTwo from "../screens/Dashboard/DashboardTwo";
 import RegisterOptions from "../screens/register/RegisterOptions";
 import RegisterSO from "../screens/register/RegisterSO";
+import volOn from "../assets/vol-on.png";
+import volOff from "../assets/vol-off.png";
+import { toggleButtonSoundOff, toggleButtonSoundOn, useButtonSoundFlagData } from "../redux/appSlice";
 
 const AppNavigator = () => {
+
+  const cx = classNames.bind(styles);
+
+  const dispatch = useDispatch();
+  
+  const [aud, setAud] = useState(false);
+
+  const music = document.getElementById('audio');
+
+  useEffect(()=>{
+
+if(!aud){
+  music.pause();
+  music.currentTime = 0 ;
+  dispatch(toggleButtonSoundOff())
+}
+else{
+  console.log("music")
+  music.play();
+  dispatch(toggleButtonSoundOn());
+}
+  },[aud])
+
+
   return (
+    <div>      <img
+    data-testid="img-logo-resident"
+    className={cx("volOn")}
+    src={aud?volOn:volOff}
+    alt="Logo"
+    onClick={()=>setAud(!aud)}
+  />
     <Router>
       <Routes>
         <Route path="/" element={<Welcome />} />
@@ -37,7 +74,7 @@ const AppNavigator = () => {
         <Route path="/registerOptions" element={<RegisterOptions/>} />
         <Route path="/registerSO" element={<RegisterSO/>} />
       </Routes>
-    </Router>
+    </Router></div>
   );
 };
 

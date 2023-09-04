@@ -3,6 +3,8 @@ import classNames from "classnames/bind";
 import styles from "./CustomButton.scss";
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
+import cloth2 from "../assets/music/cloth2.mp3";
+import { useButtonSoundFlagData } from "../redux/appSlice";
 
 interface Props {
   testId?: string;
@@ -19,13 +21,30 @@ const CustomButton: React.FC<Props> = ({
   className,
   loading,
 }) => {
+
   const cx = classNames.bind(styles);
+  let audio = new Audio(cloth2);
+
+  const buttonFlagSound:any = useButtonSoundFlagData();
+
+  console.log("button bool", buttonFlagSound);
+
+const buttonClick=()=>{
+
+  if(buttonFlagSound){
+    audio.play();
+    clicked();
+  }else{
+    clicked();
+  }
+  
+}
 
   return (
     <button
       data-testid={`custom-btn-${testId}`}
       className={cx("basic", className)}
-      onClick={clicked}
+      onClick={buttonClick}
     >
       {loading?(<div className={cx("spinner")} ><Spinner/></div>):(<div>{content}</div>)}
       

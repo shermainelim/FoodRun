@@ -47,6 +47,8 @@ const initialState = {
   isResetSecondDoneCreated: false,
   checkLoading: false,
   isCheckCreated: false,
+
+  buttonSoundFlag: false,
 };
 
 const name = "appState";
@@ -470,10 +472,17 @@ export const goalPost = createAsyncThunk(
   }
 );
 
+
 const appSlice = createSlice({
   name,
   initialState,
   reducers: {
+    toggleButtonSoundOn:(state) =>{
+      state.buttonSoundFlag = true;
+    },
+    toggleButtonSoundOff:(state)=>{
+      state.buttonSoundFlag = false;
+    },
     completeUnique: (state) => {
       state.isUniqueCreated = initialState.isUniqueCreated;
     },
@@ -740,7 +749,8 @@ const appSlice = createSlice({
 });
 
 // each case under reducers becomes an action
-
+export const {toggleButtonSoundOn} = appSlice.actions;
+export const {toggleButtonSoundOff} = appSlice.actions;
 export const { completeRegister } = appSlice.actions;
 export const { completeIsUnique } = appSlice.actions;
 export const { completeGoalDone } = appSlice.actions;
@@ -759,6 +769,9 @@ export const { logOutGoalFetch } = appSlice.actions;
 export const { logOutFinanceFetch } = appSlice.actions;
 
 export default appSlice.reducer;
+
+export const useButtonSoundFlagData = () =>
+  useSelector((state)=>state.appState.buttonSoundFlag);
 
 export const useFinanceFetchLoading = () =>
 useSelector((state) => state.appState.sLoggedInFinanceFetched);
