@@ -1,10 +1,11 @@
 import * as React from "react";
 import classNames from "classnames/bind";
 import styles from "./CustomButton.scss";
+import { useButtonSoundFlagData } from "../redux/appSlice";
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
 import cloth2 from "../assets/music/cloth2.mp3";
-import { useButtonSoundFlagData } from "../redux/appSlice";
+
 
 interface Props {
   testId?: string;
@@ -23,9 +24,8 @@ const CustomButton: React.FC<Props> = ({
 }) => {
 
   const cx = classNames.bind(styles);
-  let audio = new Audio(cloth2);
-
   const buttonFlagSound:any = useButtonSoundFlagData();
+  let audio = new Audio(cloth2);
 
   console.log("button bool", buttonFlagSound);
 

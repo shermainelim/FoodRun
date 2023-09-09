@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Welcome.scss";
@@ -8,38 +8,10 @@ import CustomButton from "../../shared/CustomButton";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
-// import volOn from "../../assets/vol-on.png";
-// import volOff from "../../assets/vol-off.png";
-
 
 const Welcome = () => {
   const navigate = useNavigate();
   const cx = classNames.bind(styles);
-
-  // const [aud, setAud] = useState(false);
-
-
-
-//   const music = document.getElementById('audio');
-
-//   useEffect(()=>{
-
-// if(!aud){
-//   music.pause();
-//   music.currentTime = 0 ;
-// }
-// else{
-//   console.log("music")
-//   music.play();
-// }
-//   },[aud])
-
-
-  // const navigateLogin=()=>{
-  //   audio.play();
-  //   navigate("/loginOptions");
-  // }
-
 
 
   const onSubmit = () => {
@@ -84,13 +56,7 @@ const Welcome = () => {
 
   return (
     <div className={cx("container")}>
-      {/* <img
-        data-testid="img-logo-resident"
-        className={cx("volOn")}
-        src={aud?volOn:volOff}
-        alt="Logo"
-        onClick={()=>setAud(!aud)}
-      /> */}
+      
       <img
         data-testid="img-logo-resident"
         className={cx("gifButterfly")}
@@ -122,8 +88,6 @@ const Welcome = () => {
           navigate("/registerOptions");
         }}
       ></CustomButton>
-
-     
 
       <CustomButton
         className="resident-btn"
