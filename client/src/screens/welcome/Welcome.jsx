@@ -13,6 +13,8 @@ const Welcome = () => {
   const navigate = useNavigate();
   const cx = classNames.bind(styles);
 
+  
+
 
   const onSubmit = () => {
     confirmAlert({

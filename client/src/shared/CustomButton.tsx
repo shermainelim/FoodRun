@@ -27,8 +27,6 @@ const CustomButton: React.FC<Props> = ({
   const buttonFlagSound:any = useButtonSoundFlagData();
   let audio = new Audio(cloth2);
 
-  console.log("button bool", buttonFlagSound);
-
 const buttonClick=()=>{
 
   if(buttonFlagSound){

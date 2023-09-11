@@ -18,6 +18,7 @@
     "classnames": "^2.3.1",
     "cogo-toast": "^4.2.3",
     "emailjs-com": "^3.2.0",
+    "geolib": "^3.3.4",
     "moment": "^2.29.4",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
