@@ -21,6 +21,7 @@ import RegisterSO from "../screens/register/RegisterSO";
 import volOn from "../assets/vol-on.png";
 import volOff from "../assets/vol-off.png";
 import { toggleButtonSoundOff, toggleButtonSoundOn, useButtonSoundFlagData } from "../redux/appSlice";
+import ImageUpload from "../screens/ImageUpload";
 
 const AppNavigator = () => {
 
@@ -73,6 +74,7 @@ else{
         <Route path="/changePasswordSecond" element={<ChangePasswordSecond/>} />
         <Route path="/registerOptions" element={<RegisterOptions/>} />
         <Route path="/registerSO" element={<RegisterSO/>} />
+        <Route path="/imageUpload" element={<ImageUpload/>} />
       </Routes>
     </Router></div>
   );

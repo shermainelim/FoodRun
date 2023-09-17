@@ -1,0 +1,95 @@
+
+body, html {
+
+    background-color: #f9f6d5;
+  }
+  
+  @media (max-width:960px){
+    html{
+      font-size:8px
+    }
+  }
+  
+  @media (max-width:961px) and (max-width: 1024px){
+    html{
+      font-size:9px;
+    }
+  }
+  
+  @media (max-width:1025px) and (max-width: 1281px){
+    html{
+      font-size:11px;
+    }
+  }
+  
+  
+  div#root {
+    //height: 100%; /* remove this line to see div.app is no more 100% height */
+    background-color: #f9f6d5;
+    min-width:auto;
+    
+  
+  }
+  
+  div.app {
+  
+    background-color: #f9f6d5
+  }
+  
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f9f6d5;
+    margin-top: 14.875rem;;
+  
+    .react-confirm-alert-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99;
+      background: #f9f6d5;
+    }
+  
+  .volOn{
+    position: absolute;
+    width: 39px;
+    height: 39px;
+    bottom: 87%;
+    right: 5%;
+  }
+  
+     .gifButterfly{
+      position: absolute;
+      width:100px;
+      height:100px;
+       bottom:68%;
+     }
+  
+    .imageIcon{
+      width:12.5rem;
+      height:12.5rem;
+     
+    }
+  
+  
+    
+    .title{
+      font-size:2.8125rem;
+      margin-top:0.625rem;
+      margin-bottom:1.875rem;
+      font-weight:700;
+      color: "black";
+      font-family: monospace;
+    }
+  }
+  
+  
+  
