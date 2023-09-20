@@ -13,6 +13,7 @@ interface Props {
   clicked: () => void;
   className: string;
   loading?: boolean;
+  bypassRedux?:boolean;
 }
 
 const CustomButton: React.FC<Props> = ({
@@ -21,10 +22,12 @@ const CustomButton: React.FC<Props> = ({
   clicked,
   className,
   loading,
+
 }) => {
 
   const cx = classNames.bind(styles);
   const buttonFlagSound:any = useButtonSoundFlagData();
+   //const buttonFlagSound:any = true;
   let audio = new Audio(cloth2);
 
 const buttonClick=()=>{

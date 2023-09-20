@@ -1,27 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Welcome.scss";
 import Eco from "../../assets/f1.png";
 import butterfly from "../../assets/butterfly.gif";
 import CustomButton from "../../shared/CustomButton";
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 
 const Welcome = () => {
   const navigate = useNavigate();
   const cx = classNames.bind(styles);
+  const [popUp, setPopUp] = useState(false);
 
   
 
 
-  const onSubmit = () => {
-    confirmAlert({
-      customUI: ({ onClose }) => {
+  const renderTC =() => {
+    
         return (
           <div
             style={{
+              position:"fixed",
+              top:0,
+              left:0,
+              right:0,
+              bottom:0,
+              zIndex:99,
+              backgroundColor:"#f9f6d5",
+              marginTop:"100px",
+              textAlign:"center",
             opacity:1,
               fontSize: "1.25rem",
               fontFamily: "monospace",
@@ -42,14 +49,15 @@ const Welcome = () => {
               className="alert-btn"
               testId="resident"
               content="I agree"
-              clicked={onClose}
+              clicked={()=>setPopUp(false)}
+          
             ></CustomButton>
 
             
           </div>
         );
-      },
-    });
+      
+    
   };
 
   
@@ -95,8 +103,9 @@ const Welcome = () => {
         className="resident-btn"
         testId="resident"
         content="Terms and Conditions"
-        clicked={onSubmit}
+        clicked={()=>setPopUp(true)}
       ></CustomButton>
+      {popUp&&renderTC()}
 
     </div>
   );
