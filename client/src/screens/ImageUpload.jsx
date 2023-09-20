@@ -17,8 +17,9 @@ const ImageUpload = () => {
   const navigate = useNavigate();
   const cx = classNames.bind(styles);
 
-  const [imageSelected, setImageSelected] = useState("");
-  const [url , setUrl] = useState("");
+  const [imageSelected, setImageSelected] = useState([]);
+  const [url , setUrl] = useState([]);
+  let arr = [];
 
   const myCld = new Cloudinary({
     cloud: {
@@ -30,25 +31,37 @@ const ImageUpload = () => {
   
 
   const uploadImage= ()=>{
+    setUrl([]);
+
     const formData = new FormData();
-    formData.append("file", imageSelected);
-    formData.append("upload_preset", "qt7djoyu");
 
+    console.log("images", imageSelected);
 
-    Axios.post("https://api.cloudinary.com/v1_1/dbpz6zmrx/image/upload", formData).then((response)=>{
+    for(let i = 0; i<imageSelected.length; i++){
+      formData.append("file", imageSelected[i]);
+      formData.append("upload_preset", "qt7djoyu");
+      Axios.post("https://api.cloudinary.com/v1_1/dbpz6zmrx/image/upload", formData).then((response)=>{
         console.log(response);
         if(response.status=200){
-            setUrl(response.data.public_id);
+
+          setUrl(url => [...url, response.data.public_id]);
+          
+            console.log("the arr here", url);
         }
     });
+
+    console.log("url arr", arr);
+    }
   }
 
   return (
     <div className={cx("container")}>
-      <input type="file" onChange={(event)=>{setImageSelected(event.target.files[0])}}/>
+      <input type="file" multiple={true} onChange={(event)=>{setImageSelected(event.target.files)}}/>
       <button onClick={uploadImage}>Upload Image</button>
+      {url.map((item, i)=><AdvancedImage style={{padding:"20px"}}key={i} cldImg={myCld?.image(url[i])} plugins={[lazyload(),responsive(), placeholder()]} />)}
+      
 
-      <AdvancedImage cldImg={img} plugins={[lazyload(),responsive(), placeholder()]} />
+     
     </div>
   );
 };
