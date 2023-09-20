@@ -29,8 +29,6 @@ import { Navigate } from "react-router-dom";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import Couple from "../../assets/couple6.png";
-import { confirmAlert } from "react-confirm-alert"; // Import
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import * as cgUtils from "../../utils/cgUtil";
 import cogoToast from "cogo-toast";
 import { Spinner } from "react-activity";
