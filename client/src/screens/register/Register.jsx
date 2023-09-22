@@ -66,10 +66,10 @@ const Register = () => {
       firstPersonName
     };
 
-    const response = await axios.post(
-      "https://couple-goals-new.herokuapp.com/api/sendemail",
-      data
-    );
+    // const response = await axios.post(
+    //   "https://couple-goals-new.herokuapp.com/api/sendemail",
+    //   data
+    // );
     
     cogoToast.success("Email First Sent!");
   };

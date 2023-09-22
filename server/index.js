@@ -428,6 +428,10 @@ const postalCode = req.body.postalCode;
 
 console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,address,postalCode);
 
+
+
+
+
 // do validation here before insert
 // because raw sql query, need validate for symbols. to prevent script insertion like <>
 // sanization of data
@@ -458,7 +462,7 @@ console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,a
   );
 
   //register SO
-app.post("/registerSO", (req, res) => {
+app.post("/registerSO", async(req, res) => {
   const id = req.body.id;
   const username = req.body.username;
   const firstPersonName = req.body.firstPersonName;
@@ -468,6 +472,35 @@ const address = req.body.address;
 const postalCode = req.body.postalCode;
 
 console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,address,postalCode);
+
+//transform postal code to lat and long
+const axios = require('axios');
+
+let latitude ;
+let longtitude;
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: `https://www.onemap.gov.sg/api/common/elastic/search?searchVal=${postalCode}&returnGeom=Y&getAddrDetails=Y&pageNum=1`,
+  headers: { 
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMTc2Njc0ZTBjNzkyMDk0OTg4NWIyMzU5ZTlmNTY5OCIsImlzcyI6Imh0dHA6Ly9pbnRlcm5hbC1hbGItb20tcHJkZXppdC1pdC0xMjIzNjk4OTkyLmFwLXNvdXRoZWFzdC0xLmVsYi5hbWF6b25hd3MuY29tL2FwaS92Mi91c2VyL3Bhc3N3b3JkIiwiaWF0IjoxNjk0MjQyNTM4LCJleHAiOjE2OTQ1MDE3MzgsIm5iZiI6MTY5NDI0MjUzOCwianRpIjoiWHRIV3BEOVlnQlh6WnBYOSIsInVzZXJfaWQiOjc0OCwiZm9yZXZlciI6ZmFsc2V9.B5ZcxwlfKTD4DaFWwXuqAx7CjtT715QEXn71sKCjqS0', 
+    'Cookie': '_toffsuid=Z47nAWT8GeMLX3SgB0vaAg=='
+  }
+};
+
+await axios.request(config)
+.then((response) => {
+  
+  latitude= response.data.results[0].LATITUDE.toString()
+  longtitude=response.data.results[0].LONGITUDE.toString();
+
+  console.log("lat", latitude);
+  console.log("long", longtitude);
+})
+.catch((error) => {
+  console.log(error);
+});
 
 // do validation here before insert
 // because raw sql query, need validate for symbols. to prevent script insertion like <>
@@ -485,13 +518,15 @@ console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,a
       if (result.length > 0) {
         res.send({ message: "Username taken, account not created." });
       } else {
-        res.send({message: "Register successful"});
+        
         //Username not taken
         
     db.query(
-      "INSERT INTO fooddash.storeOwnersRL ( id, username, storeName, email, password, sgAddress, sgPostalCode) VALUES (?,?,?,?,?,?,?)",
-      [id, username, firstPersonName, firstPersonEmail, hash1, address, postalCode]
+      "INSERT INTO fooddash.storeOwnersRL ( id, username, storeName, email, password, sgAddress, sgPostalCode, sgLatitude, sgLongtitude) VALUES (?,?,?,?,?,?,?,?,?)",
+      [id, username, firstPersonName, firstPersonEmail, hash1, address, postalCode, latitude, longtitude]
     );
+
+    res.send({message: "Register successful"});
   
   } })
 }
