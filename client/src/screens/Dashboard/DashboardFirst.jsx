@@ -235,30 +235,9 @@ const DashboardFirst = () => {
         placeholder="Search Postal Code"
         
       />
-<div className={cx("dh-cus-caro")}>
-<Carousel
-  containerClass="carousel-container"
-  swipeable={true}
-  draggable={true}
-  infinite={true}
-      partialVisbile={true}
-      arrows={true}
-      itemClass="image-item"
-      responsive={responsive}
-      deviceType={"desktop"}
-      
-    >
-      {images.map(image => {
-        return (<> <Image
-          draggable={false}
-          style={{ padding:"10px",width: "120px", height: "110px" }}
-          src={image}
-        /><div>wa mun ti</div></>
-         
-        );
-      })}
-    </Carousel></div>
 
+
+   
 
 
       

@@ -22,6 +22,7 @@ import volOn from "../assets/vol-on.png";
 import volOff from "../assets/vol-off.png";
 import { toggleButtonSoundOff, toggleButtonSoundOn, useButtonSoundFlagData } from "../redux/appSlice";
 import ImageUpload from "../screens/ImageUpload";
+import ManyStores from "../screens/stores/ManyStores";
 
 const AppNavigator = () => {
 
@@ -75,6 +76,7 @@ else{
         <Route path="/registerOptions" element={<RegisterOptions/>} />
         <Route path="/registerSO" element={<RegisterSO/>} />
         <Route path="/imageUpload" element={<ImageUpload/>} />
+        <Route path="/stores" element={<ManyStores/>} />
       </Routes>
     </Router></div>
   );
