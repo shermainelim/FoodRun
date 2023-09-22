@@ -40,20 +40,22 @@ import "react-multi-carousel/lib/styles.css";
 import { Image } from "semantic-ui-react";
 
 const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 3
+  },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    paritialVisibilityGutter: 60
+    items: 3
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    paritialVisibilityGutter: 50
+    items: 3
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
-    paritialVisibilityGutter: 30
+    items: 3
   }
 };
 const images = [
@@ -236,20 +238,23 @@ const DashboardFirst = () => {
 <div className={cx("dh-cus-caro")}>
 <Carousel
   containerClass="carousel-container"
-
+  swipeable={true}
+  draggable={true}
+  infinite={true}
       partialVisbile={true}
-      arrows={false}
+      arrows={true}
       itemClass="image-item"
       responsive={responsive}
+      deviceType={"desktop"}
       
     >
       {images.map(image => {
-        return (
-          <Image
-            draggable={false}
-            style={{ marginRight:"10px",width: "120px", height: "110px" }}
-            src={image}
-          />
+        return (<> <Image
+          draggable={false}
+          style={{ padding:"10px",width: "120px", height: "110px" }}
+          src={image}
+        /><div>wa mun ti</div></>
+         
         );
       })}
     </Carousel></div>
