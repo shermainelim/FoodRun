@@ -428,10 +428,6 @@ const postalCode = req.body.postalCode;
 
 console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,address,postalCode);
 
-
-
-
-
 // do validation here before insert
 // because raw sql query, need validate for symbols. to prevent script insertion like <>
 // sanization of data
@@ -527,6 +523,78 @@ await axios.request(config)
     );
 
     res.send({message: "Register successful"});
+  
+  } })
+}
+  );
+
+
+    //find nearest stores
+app.post("/findNearestStores", async(req, res) => {
+
+const postalCode = req.body.postalCode;
+
+//transform postal code to lat and long
+const axios = require('axios');
+
+let latitude ;
+let longtitude;
+
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: `https://www.onemap.gov.sg/api/common/elastic/search?searchVal=${postalCode}&returnGeom=Y&getAddrDetails=Y&pageNum=1`,
+  headers: { 
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMTc2Njc0ZTBjNzkyMDk0OTg4NWIyMzU5ZTlmNTY5OCIsImlzcyI6Imh0dHA6Ly9pbnRlcm5hbC1hbGItb20tcHJkZXppdC1pdC0xMjIzNjk4OTkyLmFwLXNvdXRoZWFzdC0xLmVsYi5hbWF6b25hd3MuY29tL2FwaS92Mi91c2VyL3Bhc3N3b3JkIiwiaWF0IjoxNjk0MjQyNTM4LCJleHAiOjE2OTQ1MDE3MzgsIm5iZiI6MTY5NDI0MjUzOCwianRpIjoiWHRIV3BEOVlnQlh6WnBYOSIsInVzZXJfaWQiOjc0OCwiZm9yZXZlciI6ZmFsc2V9.B5ZcxwlfKTD4DaFWwXuqAx7CjtT715QEXn71sKCjqS0', 
+    'Cookie': '_toffsuid=Z47nAWT8GeMLX3SgB0vaAg=='
+  }
+};
+
+await axios.request(config)
+.then((response) => {
+  
+  
+  latitude= response.data.results[0].LATITUDE.toString()
+  longtitude=response.data.results[0].LONGITUDE.toString();
+  
+
+  console.log("lat", latitude);
+  console.log("long", longtitude);
+})
+.catch((error) => {
+  console.log(error);
+});
+
+// do validation here before insert
+// because raw sql query, need validate for symbols. to prevent script insertion like <>
+// sanization of data
+  
+  const sqlQuery = `
+  SELECT storeName, sgLatitude, sgLongtitude, SQRT(
+    POW(69.1 * (sgLatitude - ${latitude}), 2) +
+    POW(69.1 * (${longtitude} - sgLongtitude) * COS(sgLatitude/ 57.3), 2)) AS distance
+  FROM fooddash.storeOwnersRL HAVING distance < 25 ORDER BY distance LIMIT 0, 5;
+`;
+
+  db.query(
+    sqlQuery,
+    (err, result) => {
+      if (err) {
+        console.log("error", err);
+        res.send({ message: "Error" });
+      }
+     else {
+
+    
+        const latit = result[0].sgLatitude;
+        const longtit= result[0].sgLongtitude;
+        const distance = result[0].distance;
+
+   const postalData=[latit, longtit, distance];
+    console.log("postalData", postalData);
+
+    res.send({data: postalData,message: "Successful"});
   
   } })
 }
