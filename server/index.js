@@ -466,6 +466,7 @@ app.post("/registerSO", async(req, res) => {
   const firstPersonPassword = req.body.firstPersonPassword;
 const address = req.body.address;
 const postalCode = req.body.postalCode;
+const secureUrl = req.body.secureUrl;
 
 console.log(id, username,firstPersonName, firstPersonEmail,firstPersonPassword,address,postalCode);
 
@@ -518,8 +519,8 @@ await axios.request(config)
         //Username not taken
         
     db.query(
-      "INSERT INTO fooddash.storeOwnersRL ( id, username, storeName, email, password, sgAddress, sgPostalCode, sgLatitude, sgLongtitude) VALUES (?,?,?,?,?,?,?,?,?)",
-      [id, username, firstPersonName, firstPersonEmail, hash1, address, postalCode, latitude, longtitude]
+      "INSERT INTO fooddash.storeOwnersRL ( id, username, storeName, email, password, sgAddress, sgPostalCode, sgLatitude, sgLongtitude,imageBrand) VALUES (?,?,?,?,?,?,?,?,?,?)",
+      [id, username, firstPersonName, firstPersonEmail, hash1, address, postalCode, latitude, longtitude, secureUrl]
     );
 
     res.send({message: "Register successful"});

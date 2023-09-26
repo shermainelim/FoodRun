@@ -11,6 +11,25 @@
     font-family: monospace;
     margin-top: 5.25rem;
 
+    .store-icon-title{
+        margin:1.25rem auto;
+        font-size: 0.875rem;
+
+        .upload-container{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #f9f6d5;
+            font-family: monospace;
+            margin-top: 1.25rem;
+        }
+    }
+
     .register-title{
         font-size: 1.25rem;
         text-align: center;
@@ -30,6 +49,8 @@
         .input-couple-space-name{
             margin:1.25rem auto;
             font-size: 0.875rem;
+
+            
         }
 
         .input-couple-space-name-person{

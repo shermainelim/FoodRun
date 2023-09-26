@@ -170,6 +170,33 @@ export const loginSO = createAsyncThunk(
   }
 );
 
+
+//find nearest stores
+export const findNearestStores = createAsyncThunk(
+  `${name}/findNearestStores`,
+  async ({
+    postalCode
+  }) => {
+    try {
+      console.log("hit reigster")
+      const res = await axios.post("findNearestStores", {
+        postalCode
+      });
+
+
+      if (res.data.message === "Error") {
+        cogoToast.error("Error");
+      } 
+      else if (res.data.message === "Successful") {
+        cogoToast.success("Created successfully.");
+      }
+    } catch (err) {
+      cogoToast.error("Failed.");
+    }
+  }
+);
+
+
 //register SO
 export const registerSO = createAsyncThunk(
   `${name}/registerSO`,
@@ -180,7 +207,8 @@ export const registerSO = createAsyncThunk(
     firstPersonEmail,
     firstPersonPassword,
     address,
-    postalCode
+    postalCode,
+    secureUrl
   }) => {
     try {
       console.log("hit reigster")
@@ -191,7 +219,8 @@ export const registerSO = createAsyncThunk(
         firstPersonEmail,
         firstPersonPassword,
         address,
-        postalCode
+        postalCode,
+        secureUrl
       });
 
 

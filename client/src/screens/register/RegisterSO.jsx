@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { checkUniqueSO,registerSO } from "../../redux/appSlice";
 import styles from "./RegisterSO.scss";
 import classNames from "classnames/bind";
 import CustomButton from "../../shared/CustomButton";
 import { useNavigate } from "react-router-dom";
-import axios from "../../utils/axios";
 import cogoToast from "cogo-toast";
+import { AdvancedImage } from '@cloudinary/react'
+import { Cloudinary } from '@cloudinary/url-gen';
+import {
+    lazyload,
+    responsive,
+    accessibility,
+    placeholder
+  } from "@cloudinary/react";
+  import Axios from "axios";
+
 
 const RegisterSO = () => {
   const cx = classNames.bind(styles);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [username, setChangeUsername] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -21,6 +32,52 @@ const RegisterSO = () => {
   const [address, setAddress] = useState("");
   const [postalCode, setPostalCode] = useState("");
   
+
+
+
+  const [imageSelected, setImageSelected] = useState([]);
+  const [url , setUrl] = useState([]);
+  const [secureUrl , setSecureUrl] = useState("");
+  let arr = [];
+
+  const myCld = new Cloudinary({
+    cloud: {
+      cloudName: "dbpz6zmrx",
+    },
+  });
+  
+  let img = myCld.image(url);
+
+  const uploadImage= ()=>{
+    console.log("hit here")
+    setUrl([]);
+
+    const formData = new FormData();
+
+    console.log("images", imageSelected);
+
+    for(let i = 0; i<imageSelected.length; i++){
+      formData.append("file", imageSelected[i]);
+      formData.append("upload_preset", "qt7djoyu");
+      Axios.post("https://api.cloudinary.com/v1_1/dbpz6zmrx/image/upload", formData).then((response)=>{
+        console.log(response);
+        if(response.status=200){
+
+          setUrl(url => [...url, response.data.public_id]);
+          setSecureUrl(response.data.secure_url);
+          
+            console.log("the arr here", url);
+        }
+    });
+
+    console.log("url arr", secureUrl);
+    }
+  }
+  
+  useEffect(()=>{
+    uploadImage();
+      },[imageSelected])
+
   function randomIntFromInterval(min, max) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -28,8 +85,8 @@ const RegisterSO = () => {
 
   var id = username+"-"+randomIntFromInterval(1, 10000000);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+
 
   const usernameHandler = (event) => {
     setChangeUsername(event.target.value);
@@ -191,6 +248,18 @@ const RegisterSO = () => {
 
       </div>
 
+      <div className={cx("store-icon-title")}>
+        Store Icon
+        <div className={cx("upload-container")}>
+      <input style={{marginBottom:"30px", display:"flex", justifyContent:"center",alignItems:"center"}}type="file" multiple={false} onChange={(event)=>{setImageSelected(event.target.files)}}/>
+      {/* <button onClick={uploadImage}>Upload Image</button> */}
+      {url.map((item, i)=><AdvancedImage style={{padding:"20px"}}key={i} cldImg={myCld?.image(url[i])} plugins={[lazyload(),responsive(), placeholder()]} />)}
+      
+
+     
+    </div>
+      </div>
+
       <CustomButton
         className="resident-btn"
         testId="resident"
@@ -204,7 +273,8 @@ const RegisterSO = () => {
             firstPersonEmail.length !== 0 &&
             firstPersonPassword.length !== 0 &&
             address.length!==0 &&
-            postalCode.length!==0
+            postalCode.length!==0 &&
+            secureUrl.length!==0
             
           ) {
             dispatch(
@@ -215,7 +285,8 @@ const RegisterSO = () => {
                 firstPersonEmail,
                 firstPersonPassword,
                 address,
-                postalCode
+                postalCode,
+                secureUrl
               })
             );
               sendEmail();
@@ -227,6 +298,7 @@ const RegisterSO = () => {
             setChangeFirstPersonPassword("");
             setAddress("");
             setPostalCode("");
+            setSecureUrl("");
           }
         }}
       ></CustomButton>
